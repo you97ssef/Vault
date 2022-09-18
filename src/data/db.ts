@@ -1,18 +1,21 @@
 import type { Category } from "@/models/category";
 import type { Config } from "@/models/config";
 import type { Secret } from "@/models/secret";
+import { SecretService } from "@/services/secret-service";
 
 const config: Config = { pass: "Secret", pin: "0000" };
 let categories: Category[] = [];
+
+const secretService: SecretService = new SecretService(config);
 
 for (let i = 0; i < 10; i++) {
     let secrets: Secret[] = [];
     for (let j = i * 100; j < (i + 1) * 100; j++) {
         secrets.push({
             id: j,
-            secret: "secret-" + j,
+            secret: secretService.encrypt("secret-" + j),
             topic: "topic-" + j,
-            username: "username-" + j,
+            username: secretService.encrypt("username-" + j),
         });
     }
 
