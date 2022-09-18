@@ -1,4 +1,4 @@
-import type { Secret } from "./Secret";
+import type { Secret } from "./secret";
 
 export interface Category {
     id: number;
