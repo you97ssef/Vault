@@ -6,5 +6,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped>
+<style lang="scss">
+
+@charset "utf-8";
+@import "../node_modules/bulma/bulma.sass";
+
 </style>
