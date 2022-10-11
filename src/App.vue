@@ -1,14 +1,13 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <RouterView />
+    <Navbar></Navbar>
+    <section class="section">
+        <div class="container">
+            <RouterView />
+        </div>
+    </section>
 </template>
 
-<style lang="scss">
-
-@charset "utf-8";
-@import "../node_modules/bulma/bulma.sass";
-
-</style>
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import Navbar from "./components/Navbar.vue";
+</script>
