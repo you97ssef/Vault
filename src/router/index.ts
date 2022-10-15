@@ -1,4 +1,5 @@
 import Categories from '@/views/Categories.vue'
+import Secrets from '@/views/Secrets.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/categories',
       name: 'categories',
       redirect: '/'
+    },
+    {
+      path: '/categories/:id',
+      name: 'category',
+      component: Secrets
     },
   ]
 })
