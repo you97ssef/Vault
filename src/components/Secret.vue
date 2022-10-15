@@ -2,8 +2,8 @@
     <div class="card has-background-link-light">
         <div class="card-content">
             <p class="title is-2 has-text-centered mb-5">{{ secret.topic }}</p>
-            <p class="title is-6 has-text-centered mb-2">
-                <i class="fa-solid fa-user"></i>
+            <p class="has-text-centered mb-2">
+                <i class="fa-solid fa-user"></i> <b>Username/Email :</b>
                 {{ visibleUsername ? show(secret.username) : '************************' }}
             </p>
             <div class="buttons is-justify-content-center are-small">
@@ -15,8 +15,8 @@
                     <i class="fa-solid fa-copy"></i>
                 </button>
             </div>
-            <p class="title is-6 has-text-centered mb-2">
-                <i class="fa-solid fa-key"></i>
+            <p class="has-text-centered mb-2">
+                <i class="fa-solid fa-key"></i> <b>Password/Secret :</b>
                 {{ visibleSecret ? show(secret.secret) : '************************' }}
             </p>
             <div class="buttons is-justify-content-center are-small">
