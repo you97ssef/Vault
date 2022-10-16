@@ -1,5 +1,6 @@
+import Categories from '@/views/Categories.vue'
+import Secrets from '@/views/Secrets.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +8,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: Categories
+    },
+    {
+      path: '/categories',
+      name: 'categories',
+      redirect: '/'
+    },
+    {
+      path: '/categories/:id',
+      name: 'category',
+      component: Secrets
     },
   ]
 })
