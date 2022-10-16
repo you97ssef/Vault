@@ -3,7 +3,7 @@ import App from "./App.vue";
 import type { Config } from "./models/config";
 import router from "./router";
 
-import "../node_modules/bulma/bulma.sass";
+import "../assets/style.sass";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
 const app = createApp(App);
