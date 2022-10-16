@@ -13,7 +13,7 @@
     border: .2em black solid;
 }
 .card:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
   transition: all 0.3s ease;
   box-shadow: 0 0.125rem 0.75rem #000 !important;
   z-index: 3;

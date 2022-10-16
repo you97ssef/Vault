@@ -16,7 +16,20 @@ export default defineComponent({
 
 <template>
     <main>
-        <h1 class="title is-3 has-text-centered">Categories</h1>
+        <div class="is-flex is-justify-content-space-between mb-5">
+            <div>
+                <h1 class="title">Categories</h1>
+                <h2 class="subtitle">lists of some particular secrets you define.</h2>
+            </div>
+            <div class="buttons">
+                <button class="button is-dark">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <button class="button is-black">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </button>
+            </div>
+        </div>
         <div class="columns is-multiline is-mobile is-3">
             <div class="column is-half-tablet is-one-third-desktop is-full-mobile" v-for="cat of data.categories" v-bind:key="cat.id">
                 <Category :category="cat"></Category>
