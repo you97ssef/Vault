@@ -1,0 +1,3 @@
+<template>
+    Edit Category
+</template>
