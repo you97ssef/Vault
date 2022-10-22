@@ -1,5 +1,4 @@
 <script lang="ts">
-import { db } from "@/data/db";
 import { defineComponent } from "vue";
 import Secret from "../components/Secret.vue";
 import Category from "../components/Category.vue";
@@ -7,7 +6,7 @@ import Category from "../components/Category.vue";
 export default defineComponent({
     data() {
         return {
-            data: db,
+            categories: [],
             edition: false
         };
     },
@@ -16,6 +15,9 @@ export default defineComponent({
         toggleEdition() {
             this.edition = !this.edition
         }
+    },
+    created() {
+        this.categories = this.categoryService.all()
     }
 });
 </script>
@@ -41,10 +43,28 @@ export default defineComponent({
                 </button>
             </div>
         </div>
+        <div class="has-text-centered top-space" v-if="categories.length == 0">
+            <img src="@/assets/empty.svg" alt="empty" width="200">
+            <h4 class="title is-4 m-2">No categories available!!</h4>
+            <button class="button is-dark" v-if="!edition">
+                <span class="icon">
+                    <i class="fa-solid fa-lg fa-plus"></i>
+                </span>
+                <span>
+                    Create a new category
+                </span>
+            </button>
+        </div>
         <div class="columns is-multiline is-mobile is-3">
-            <div class="column is-half-tablet is-one-third-desktop is-full-mobile" v-for="cat of data.categories" v-bind:key="cat.id">
+            <div class="column is-half-tablet is-one-third-desktop is-full-mobile" v-for="cat of categories" v-bind:key="cat.id">
                 <Category :category="cat" :edition="edition"></Category>
             </div>
         </div>
     </main>
 </template>
+
+<style scoped>
+.top-space {
+    margin-top: 6em;
+}
+</style>
