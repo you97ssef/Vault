@@ -10,11 +10,7 @@ export class CategoryService {
     }
 
     new(category: Category) {
-        let count = JSON.parse(localStorage.getItem("count")!);
-
-        category.id = count.categories = parseInt(count.categories) + 1;
-        localStorage.setItem("count", JSON.stringify(count));
-
+        category.id = this.newId();
         localStorage.setItem("category-" + category.id, JSON.stringify(category));
     }
 
@@ -59,5 +55,12 @@ export class CategoryService {
             return 0
         }
         else return JSON.parse(countString).categories;
+    }
+
+    private newId(): number {
+        let count = JSON.parse(localStorage.getItem("count")!)
+        count.categories ++;
+        localStorage.setItem("count", JSON.stringify(count))
+        return count.categories;
     }
 }
