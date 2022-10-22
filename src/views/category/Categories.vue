@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import Secret from "../components/Secret.vue";
-import Category from "../components/Category.vue";
+import Secret from "../../components/Secret.vue";
+import Category from "../../components/Category.vue";
 
 export default defineComponent({
     data() {
