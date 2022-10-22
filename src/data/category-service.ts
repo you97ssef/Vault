@@ -35,16 +35,29 @@ export class CategoryService {
     }
 
     all() {
-        let count = JSON.parse(localStorage.getItem("count")!);
-
         let categories = [];
 
-        for (let i = 1; i <= parseInt(count.categories); i++) {
+        for (let i = 1; i <= this.countCategories(); i++) {
             let category = this.get(i);
 
             if (category) categories.push(category);
         }
 
         return categories;
+    }
+
+    private countCategories(): number
+    {
+        let countString = localStorage.getItem("count")
+
+        if(!countString) {
+            localStorage.setItem("count", JSON.stringify({
+                categories:0,
+                secrets:0
+            }))
+
+            return 0
+        }
+        else return JSON.parse(countString).categories;
     }
 }
