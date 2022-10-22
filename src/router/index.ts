@@ -1,5 +1,5 @@
 import Categories from '@/views/category/Categories.vue'
-import EditCategory from '@/views/category/EditCategory.vue'
+import CategoryEdition from '@/views/category/CategoryEdition.vue'
 import Secrets from '@/views/Secrets.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -24,7 +24,12 @@ const router = createRouter({
     {
       path: '/categories/:id/edit',
       name: 'edit-category',
-      component: EditCategory
+      component: CategoryEdition
+    },
+    {
+      path: '/new-category',
+      name: 'new-category',
+      component: CategoryEdition
     },
   ]
 })

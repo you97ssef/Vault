@@ -30,11 +30,11 @@ export default defineComponent({
                 <h2 class="subtitle">lists of some particular secrets you define. <i class="has-text-danger" v-if="edition">(Edition mode is on)</i></h2>
             </div>
             <div class="buttons">
-                <button class="button is-dark" v-if="!edition">
+                <router-link class="button is-dark" to="new-category" v-if="!edition">
                     <span class="icon">
                         <i class="fa-solid fa-lg fa-plus"></i>
                     </span>
-                </button>
+                </router-link>
                 <button class="button is-black is-light" @click="toggleEdition()">
                     <span class="icon">
                         <i class="fa-solid fa-lg fa-pen-nib" v-if="!edition"></i>
@@ -46,14 +46,14 @@ export default defineComponent({
         <div class="has-text-centered top-space" v-if="categories.length == 0">
             <img src="@/assets/empty.svg" alt="empty" width="200">
             <h4 class="title is-4 m-2">No categories available!!</h4>
-            <button class="button is-dark" v-if="!edition">
+            <router-link class="button is-dark" to="new-category" v-if="!edition">
                 <span class="icon">
                     <i class="fa-solid fa-lg fa-plus"></i>
                 </span>
                 <span>
                     Create a new category
                 </span>
-            </button>
+            </router-link>
         </div>
         <div class="columns is-multiline is-mobile is-3">
             <div class="column is-half-tablet is-one-third-desktop is-full-mobile" v-for="cat of categories" v-bind:key="cat.id">
