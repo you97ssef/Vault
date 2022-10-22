@@ -35,7 +35,7 @@ export default defineComponent({
                         <i class="fa-solid fa-lg fa-plus"></i>
                     </span>
                 </router-link>
-                <button class="button is-black is-light" @click="toggleEdition()">
+                <button class="button is-black is-light"  v-if="categories.length == 0" @click="toggleEdition()">
                     <span class="icon">
                         <i class="fa-solid fa-lg fa-pen-nib" v-if="!edition"></i>
                         <i class="fa-solid fa-lg fa-xmark" v-if="edition"></i>
