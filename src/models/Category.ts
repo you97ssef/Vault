@@ -4,5 +4,5 @@ export interface Category {
     id: number | null;
     name: string;
     description: string | null;
-    secrets: Secret[];
+    secrets: Secret[] | null;
 }
