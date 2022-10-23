@@ -1,6 +1,13 @@
 <template>
-    <router-link :to="{ name: 'category', params: { id: category.id }}">
-        <div class="card has-background-link-light">
+    <router-link 
+        :to="edition ? { name: 'edit-category', params: { id: category.id } } : { name: 'category', params: { id: category.id }}">
+        <div 
+            class="card" 
+            :class="{ 
+                'has-background-link-light': !edition, 
+                'has-background-danger-light' : edition 
+            }"
+        >
             <div class="card-content">
                 <p class="subtitle is-3 has-text-centered m-3">{{ category.name }}</p>
             </div>
@@ -26,7 +33,8 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
     props:[
-        "category"
+        "category",
+        "edition"
     ],
 });
 </script>
