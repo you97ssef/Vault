@@ -103,12 +103,8 @@ export default {
             // TODO delete functionality
         },
         submit() {
-            if (this.setting.edition) {
-                // TODO edit functionality
-            } else {
-                this.categoryService.new(this.category)
-                this.$router.push('/')
-            }
+            this.categoryService.save(this.category)
+            this.$router.push('/')
         }
         
     },

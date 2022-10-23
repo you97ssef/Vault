@@ -9,19 +9,9 @@ export class CategoryService {
         return null;
     }
 
-    new(category: Category) {
-        category.id = this.newId();
+    save(category: Category) {
+        if(!category.id) category.id = this.newId();
         localStorage.setItem("category-" + category.id, JSON.stringify(category));
-    }
-
-    update(categoryId: number, newCategory: Category) {
-        let category = this.get(categoryId);
-
-        if (category) {
-            newCategory.id = categoryId;
-
-            localStorage.setItem("category-" + category.id, JSON.stringify(category));
-        }
     }
 
     delete(categoryId: number) {
