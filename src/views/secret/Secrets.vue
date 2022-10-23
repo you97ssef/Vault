@@ -5,12 +5,16 @@ import Secret from "@/components/Secret.vue";
 export default defineComponent({
     data() {
         return {
-            category: {}
+            category: {},
+            secrets: []
         };
     },
     created() {
         let category = this.categoryRepo.get(this.$route.params.id);
-        if (category) this.category = category;
+        if (category) {
+            this.category = category;
+            this.secretRepo.all(this.$route.params.id)
+        }
         else this.$router.push('/404');
     },
     components: { Secret }
@@ -19,12 +23,43 @@ export default defineComponent({
 
 <template>
     <main>
-        <p class="title is-3 has-text-centered">{{ category.name }}</p>
-        <p class="has-text-centered mb-5">{{ category.description }}</p>
+        <div class="is-flex is-justify-content-space-between mb-5">
+            <div>
+                <h1 class="title">{{ category.name }}</h1>
+                <h2 class="subtitle">
+                    {{ category.description }}
+                </h2>
+            </div>
+            <div class="buttons">
+                <router-link class="button is-dark" to="/">
+                    <span class="icon">
+                        <i class="fa-solid fa-lg fa-plus"></i>
+                    </span>
+                </router-link>
+            </div>
+        </div>
+        <div class="has-text-centered top-space" v-if="category.secrets == 0">
+            <img src="@/assets/empty.svg" alt="empty" width="200">
+            <h4 class="title is-4 m-2">No Secrets available!!</h4>
+            <router-link class="button is-dark" to="/">
+                <span class="icon">
+                    <i class="fa-solid fa-lg fa-plus"></i>
+                </span>
+                <span>
+                    Create a new secret
+                </span>
+            </router-link>
+        </div>
         <div class="columns is-multiline is-mobile is-3">
-            <div class="column is-half-tablet is-one-third-desktop is-full-mobile" v-for="secret of category.secrets" v-bind:key="secret.id">
+            <div class="column is-half-tablet is-one-third-desktop is-full-mobile" v-for="secret of secrets" v-bind:key="secret.id">
                 <Secret :secret="secret"></Secret>
             </div>
         </div>
     </main>
 </template>
+
+<style scoped>
+.top-space {
+    margin-top: 6em;
+}
+</style>
