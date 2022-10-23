@@ -1,6 +1,6 @@
 import type { Category } from "@/models/category";
 
-export class CategoryService {
+export class CategoryRepo {
     get(categoryId: number) {
         let category = localStorage.getItem("category-" + categoryId);
 
