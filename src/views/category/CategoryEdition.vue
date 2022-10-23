@@ -76,7 +76,9 @@ export default {
             this.setting.title = 'Edit';
             this.setting.subtitle = 'Edit/Delete your category that regroup your secrets.'
         
-            // TODO get category by id
+            let category = this.categoryService.get(this.$route.params.id)
+            if (category) this.category = category
+            else this.$router.push('/404')
         }
     },
     data() {
