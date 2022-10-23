@@ -1,6 +1,6 @@
 <template>
   <div class="help is-flex is-justify-content-end is-flex-wrap-wrap">
-        <div class="field">
+        <div class="field m-0">
             <div class="control has-icons-left">
                 <input class="length input is-small" type="number" placeholder="Normal" v-model="length">
                 <span class="icon is-small is-left">
@@ -8,29 +8,33 @@
                 </span>
             </div>
         </div>
-           
         <span
-            class="button tag is-rounded mx-1 mb-1"
+            class="button is-small is-rounded mx-1 mb-1"
             @click="toggle('upper')"
             :class="upper ? 'is-dark' : 'is-light'"
         >
-            Upper cases
+            <i class="fa-solid fa-sm fa-a"></i>
         </span>
         <span
-            class="button tag is-rounded mx-1 mb-1"
+            class="button is-small is-rounded mx-1 mb-1"
             @click="toggle('numbers')"
             :class="numbers ? 'is-dark' : 'is-light'"
         >
-            Numbers
+            <i class="fa-solid fa-sm fa-1"></i>
         </span>
         <span
-            class="button tag is-rounded mx-1 mb-1"
+            class="button is-small is-rounded mx-1 mb-1"
             @click="toggle('specials')"
             :class="specials ? 'is-dark' : 'is-light'"
         >
-            Special characters
+            <i class="fa-solid fa-sm fa-hashtag"></i>
         </span>
-        <button class="button tag is-link is-light is-rounded mx-1 mb-1" type="button" @click="generateSecret()">Generate</button>
+        <button class="button is-small is-rounded is-link is-light mx-1 mb-1" type="button" @click="generateSecret()">
+            <div class="icon">
+                <i class="fa-solid fa-rotate"></i>
+            </div>
+            <span>Generate</span>
+        </button>
     </div>
 </template>
 
