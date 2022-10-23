@@ -86,7 +86,7 @@ export default {
             id: null,
             name: '',
             description: '',
-            secrets: null
+            secrets: 0
         }
 
         return {
