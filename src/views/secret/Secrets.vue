@@ -1,17 +1,17 @@
 <script lang="ts">
-import { db } from "@/data/db";
 import { defineComponent } from "vue";
-import Secret from "../components/Secret.vue";
+import Secret from "@/components/Secret.vue";
 
 export default defineComponent({
     data() {
         return {
-            data: db,
             category: {}
         };
     },
     created() {
-        this.category = this.data.categories.find(cat => cat.id == this.$route.params.id);
+        let category = this.categoryRepo.get(this.$route.params.id);
+        if (category) this.category = category;
+        else this.$router.push('/404');
     },
     components: { Secret }
 });

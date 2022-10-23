@@ -1,6 +1,6 @@
 import Categories from '@/views/category/Categories.vue'
 import CategoryEdition from '@/views/category/CategoryEdition.vue'
-import Secrets from '@/views/Secrets.vue'
+import Secrets from '@/views/secret/Secrets.vue'
 import NotFound from '@/views/NotFound.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
