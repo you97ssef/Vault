@@ -25,12 +25,14 @@
                 <div class="control">
                     <input class="input" type="text" placeholder="Username ..." v-model="secret.username" required>
                 </div>
+                <SecretGenerator @secret="usernameGenerated"></SecretGenerator>
             </div>
             <div class="field">
                 <label class="label">Secret/Password</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Secret ..." v-model="secret.secret" required>
+                    <input class="input" type="text" placeholder="Secret ..." v-model="secret.secret">
                 </div>
+                <SecretGenerator @secret="secretGenerated"></SecretGenerator>
             </div>
             <div class="field is-grouped">
                 <div class="control">
@@ -71,40 +73,41 @@
 <script lang="ts">
 import type { Secret } from '@/models/secret';
 import { SecretService } from '@/services/secret-service';
+import SecretGenerator from '@/components/SecretGenerator.vue';
 
 export default {
     created() {
         // setting page settings depending on the route
-        if (this.$route.name == 'new-secret') {
-            this.setting.title = 'New';
-            this.setting.subtitle = 'Add a new secret of your secrets.'
-            this.setting.edition = false
-        } else {
-            this.setting.title = 'Edit';
-            this.setting.subtitle = 'Edit/Delete your secret.'
-        
-            let secret = this.secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId)
+        if (this.$route.name == "new-secret") {
+            this.setting.title = "New";
+            this.setting.subtitle = "Add a new secret of your secrets.";
+            this.setting.edition = false;
+        }
+        else {
+            this.setting.title = "Edit";
+            this.setting.subtitle = "Edit/Delete your secret.";
+            let secret = this.secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
             if (secret) {
-                this.secret = secret
-                this.secret.username = this.secretService.decrypt(this.secret.username)
-                this.secret.secret = this.secretService.decrypt(this.secret.secret)
+                this.secret = secret;
+                this.secret.username = this.secretService.decrypt(this.secret.username);
+                this.secret.secret = this.secretService.decrypt(this.secret.secret);
             }
-            else this.$router.push('/404')
+            else
+                this.$router.push("/404");
         }
     },
     data() {
         let secret: Secret = {
             id: null,
-            topic: '',
-            username: '',
-            secret: '',
-        }
-
+            topic: "",
+            username: "",
+            secret: "",
+        };
         return {
             secretService: new SecretService(this.config),
             setting: {
-                title: '',
-                subtitle: '',
+                title: "",
+                subtitle: "",
                 edition: true
             },
             secret: secret
@@ -112,17 +115,23 @@ export default {
     },
     methods: {
         deleteSecret() {
-            this.secretRepo.delete(this.$route.params.categoryId, this.secret.id)
-            this.$router.push('/categories/' + this.$route.params.categoryId)
+            this.secretRepo.delete(this.$route.params.categoryId, this.secret.id);
+            this.$router.push("/categories/" + this.$route.params.categoryId);
         },
         submit() {
             this.secret.username = this.secretService.encrypt(this.secret.username);
             this.secret.secret = this.secretService.encrypt(this.secret.secret);
-            this.secretRepo.save(this.$route.params.categoryId, this.secret)
-            this.$router.push('/categories/' + this.$route.params.categoryId)
+            this.secretRepo.save(this.$route.params.categoryId, this.secret);
+            this.$router.push("/categories/" + this.$route.params.categoryId);
+        },
+        usernameGenerated(secret: string) {
+            this.secret.username = secret
+        },
+        secretGenerated(secret: string) {
+            this.secret.secret = secret
         }
-        
     },
+    components: { SecretGenerator }
 }
 </script>
 
