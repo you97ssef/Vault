@@ -30,7 +30,7 @@
             <div class="field">
                 <label class="label">Secret/Password</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Secret ..." v-model="secret.secret" required>
+                    <input class="input" type="text" placeholder="Secret ..." v-model="secret.secret">
                 </div>
                 <SecretGenerator @secret="secretGenerated"></SecretGenerator>
             </div>
