@@ -37,7 +37,6 @@ export class CategoryRepo {
         if(!countString) {
             localStorage.setItem("count", JSON.stringify({
                 categories:0,
-                secrets:0
             }))
 
             return 0
