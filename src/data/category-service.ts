@@ -15,9 +15,7 @@ export class CategoryService {
     }
 
     delete(categoryId: number) {
-        let category = this.get(categoryId);
-
-        if (category) localStorage.removeItem("category-" + category.id);
+        localStorage.removeItem("category-" + categoryId);
     }
 
     all() {

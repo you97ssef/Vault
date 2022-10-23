@@ -100,7 +100,8 @@ export default {
     },
     methods: {
         deleteCategory() {
-            // TODO delete functionality
+            this.categoryService.delete(this.category.id)
+            this.$router.push('/')
         },
         submit() {
             this.categoryService.save(this.category)
