@@ -13,7 +13,7 @@ export default defineComponent({
         let category = this.categoryRepo.get(this.$route.params.id);
         if (category) {
             this.category = category;
-            this.secretRepo.all(this.$route.params.id)
+            this.secrets = this.secretRepo.all(this.$route.params.id)
         }
         else this.$router.push('/404');
     },
@@ -31,17 +31,17 @@ export default defineComponent({
                 </h2>
             </div>
             <div class="buttons">
-                <router-link class="button is-dark" to="/">
+                <router-link class="button is-dark" :to="{ name: 'new-secret', params: { categoryId: $route.params.id } }">
                     <span class="icon">
                         <i class="fa-solid fa-lg fa-plus"></i>
                     </span>
                 </router-link>
             </div>
         </div>
-        <div class="has-text-centered top-space" v-if="category.secrets == 0">
+        <div class="has-text-centered top-space" v-if="secrets.length == 0">
             <img src="@/assets/empty.svg" alt="empty" width="200">
             <h4 class="title is-4 m-2">No Secrets available!!</h4>
-            <router-link class="button is-dark" to="/">
+            <router-link class="button is-dark" :to="{ name: 'new-secret', params: { categoryId: $route.params.id } }">
                 <span class="icon">
                     <i class="fa-solid fa-lg fa-plus"></i>
                 </span>
