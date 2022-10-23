@@ -28,13 +28,15 @@
                     <i class="fa-solid fa-copy"></i>
                 </button>
             </div>
-            <div class="buttons is-justify-content-space-between">
-                <button type="button" class="borderless-button has-background-link-light">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button type="button" class="borderless-button has-background-link-light">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
+            <div class="is-flex is-justify-content-end">
+                <router-link 
+                    :to="{ name: 'edit-secret', params: { categoryId: $route.params.id, secretId: secret.id } }" 
+                    class="button is-warning is-light"
+                >
+                    <span class="icon">
+                        <i class="fa-solid fa-lg fa-pen-to-square"></i>
+                    </span>
+                </router-link>
             </div>
         </div>
     </div>
@@ -43,9 +45,6 @@
 <style scoped>
 .card {
     border: .2em black solid;
-}
-.borderless-button {
-    border: 0;
 }
 </style>
 
