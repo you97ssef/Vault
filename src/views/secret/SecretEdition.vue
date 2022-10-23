@@ -20,20 +20,47 @@
                     <input class="input" type="text" placeholder="Secret topic ..." v-model="secret.topic" required>
                 </div>
             </div>
-            <div class="field">
-                <label class="label">Username/Email</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Username ..." v-model="secret.username" required>
+            <label class="label">Username/Email</label>
+            <div class="field is-grouped">
+                <div class="control is-expanded">
+                    <input 
+                        class="input" 
+                        :type="usernameVisibility ? 'text' : 'password'" 
+                        placeholder="Username ..." 
+                        v-model="secret.username"
+                        required
+                    >
                 </div>
-                <SecretGenerator @secret="usernameGenerated"></SecretGenerator>
-            </div>
-            <div class="field">
-                <label class="label">Secret/Password</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Secret ..." v-model="secret.secret">
+                    <button type="button" class="button is-dark" @click="toggleVisibility('username')">
+                        <div class="icon">
+                            <i class="fa-solid fa-lg fa-eye" v-if="!usernameVisibility"></i>
+                            <i class="fa-solid fa-eye-slash" v-if="usernameVisibility"></i>
+                        </div>
+                    </button>
                 </div>
-                <SecretGenerator @secret="secretGenerated"></SecretGenerator>
             </div>
+            <SecretGenerator @secret="usernameGenerated"></SecretGenerator>
+            <label class="label">Secret/Password</label>
+            <div class="field is-grouped">
+                <div class="control is-expanded">
+                    <input 
+                        class="input" 
+                        :type="passwordVisibility ? 'text' : 'password'" 
+                        placeholder="Secret ..." 
+                        v-model="secret.secret"
+                    >
+                </div>
+                <div class="control">
+                    <button type="button" class="button is-dark" @click="toggleVisibility('secret')">
+                        <div class="icon">
+                            <i class="fa-solid fa-lg fa-eye" v-if="!passwordVisibility"></i>
+                            <i class="fa-solid fa-eye-slash" v-if="passwordVisibility"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <SecretGenerator @secret="secretGenerated"></SecretGenerator>
             <div class="field is-grouped">
                 <div class="control">
                     <button class="button" 
@@ -110,7 +137,9 @@ export default {
                 subtitle: "",
                 edition: true
             },
-            secret: secret
+            secret: secret,
+            usernameVisibility: false,
+            passwordVisibility: false,
         };
     },
     methods: {
@@ -129,6 +158,10 @@ export default {
         },
         secretGenerated(secret: string) {
             this.secret.secret = secret
+        },
+        toggleVisibility(type: string) {
+            if(type == 'username') this.usernameVisibility = !this.usernameVisibility
+            else this.passwordVisibility = !this.passwordVisibility
         }
     },
     components: { SecretGenerator }
