@@ -1,6 +1,7 @@
 import Categories from '@/views/category/Categories.vue'
 import CategoryEdition from '@/views/category/CategoryEdition.vue'
 import Secrets from '@/views/Secrets.vue'
+import NotFound from '@/views/NotFound.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -30,6 +31,15 @@ const router = createRouter({
       path: '/new-category',
       name: 'new-category',
       component: CategoryEdition
+    },
+    {
+      path: '/404',
+      name: 'not-found',
+      component: NotFound
+    },
+    {
+      path: "/:catchAll(.*)",
+      redirect: '/404'
     },
   ]
 })
