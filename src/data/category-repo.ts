@@ -1,6 +1,6 @@
 import type { Category } from "@/models/category";
 
-export class CategoryService {
+export class CategoryRepo {
     get(categoryId: number) {
         let category = localStorage.getItem("category-" + categoryId);
 
@@ -37,7 +37,6 @@ export class CategoryService {
         if(!countString) {
             localStorage.setItem("count", JSON.stringify({
                 categories:0,
-                secrets:0
             }))
 
             return 0

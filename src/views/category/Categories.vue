@@ -17,7 +17,7 @@ export default defineComponent({
         }
     },
     created() {
-        this.categories = this.categoryService.all()
+        this.categories = this.categoryRepo.all()
     }
 });
 </script>

@@ -76,7 +76,7 @@ export default {
             this.setting.title = 'Edit';
             this.setting.subtitle = 'Edit/Delete your category that regroup your secrets.'
         
-            let category = this.categoryService.get(this.$route.params.id)
+            let category = this.categoryRepo.get(this.$route.params.id)
             if (category) this.category = category
             else this.$router.push('/404')
         }
@@ -86,7 +86,7 @@ export default {
             id: null,
             name: '',
             description: '',
-            secrets: null
+            secrets: 0
         }
 
         return {
@@ -100,11 +100,11 @@ export default {
     },
     methods: {
         deleteCategory() {
-            this.categoryService.delete(this.category.id)
+            this.categoryRepo.delete(this.category.id)
             this.$router.push('/')
         },
         submit() {
-            this.categoryService.save(this.category)
+            this.categoryRepo.save(this.category)
             this.$router.push('/')
         }
         
