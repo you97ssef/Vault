@@ -1,6 +1,6 @@
 <template>
   <div class="help is-flex is-justify-content-end is-flex-wrap-wrap">
-        <div class="field m-0">
+        <div class="field mx-1 mb-1">
             <div class="control has-icons-left">
                 <input class="length input is-small" type="number" placeholder="Normal" v-model="length">
                 <span class="icon is-small is-left">
