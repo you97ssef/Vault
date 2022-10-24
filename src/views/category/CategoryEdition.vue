@@ -13,7 +13,7 @@
                 </router-link>
             </div>
         </div>
-        <form class="top-space" @submit.prevent="submit()">
+        <form class="top-space" @submit.prevent="confirm()">
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control">
@@ -59,56 +59,74 @@
                 </div>
             </div>
         </form>
+        <Modal :state="modal" @submit="submit" @close="toggleModal(false, '', '')"></Modal>
     </div>
 </template>
 
 <script lang="ts">
+import Modal from '@/components/Modal.vue';
 import type { Category } from '@/models/category';
 
 export default {
     created() {
         // setting page settings depending on the route
-        if (this.$route.name == 'new-category') {
-            this.setting.title = 'New';
-            this.setting.subtitle = 'Add a new category to regroup your secrets.'
-            this.setting.edition = false
-        } else {
-            this.setting.title = 'Edit';
-            this.setting.subtitle = 'Edit/Delete your category that regroup your secrets.'
-        
-            let category = this.categoryRepo.get(this.$route.params.id)
-            if (category) this.category = category
-            else this.$router.push('/404')
+        if (this.$route.name == "new-category") {
+            this.setting.title = "New";
+            this.setting.subtitle = "Add a new category to regroup your secrets.";
+            this.setting.edition = false;
+        }
+        else {
+            this.setting.title = "Edit";
+            this.setting.subtitle = "Edit/Delete your category that regroup your secrets.";
+            let category = this.categoryRepo.get(this.$route.params.id);
+            if (category)
+                this.category = category;
+            else
+                this.$router.push("/404");
         }
     },
     data() {
         let category: Category = {
             id: null,
-            name: '',
-            description: '',
+            name: "",
+            description: "",
             secrets: 0
-        }
-
+        };
         return {
             setting: {
-                title: '',
-                subtitle: '',
+                title: "",
+                subtitle: "",
                 edition: true
             },
-            category: category
+            category: category,
+            modal: {
+                active: "",
+                title: "",
+                button: ""
+            }
         };
     },
     methods: {
         deleteCategory() {
-            this.categoryRepo.delete(this.category.id)
-            this.$router.push('/')
+            this.toggleModal(true, "Delete secret", "Delete");
         },
-        submit() {
-            this.categoryRepo.save(this.category)
-            this.$router.push('/')
+        submit(type: string) {
+            if (type == "Delete")
+                this.categoryRepo.delete(this.category.id);
+            else
+                this.categoryRepo.save(this.category);
+            this.$router.push("/");
+        },
+        confirm() {
+            this.toggleModal(true, this.setting.edition ? "Update category" : "New category", this.setting.edition ? "Update" : "Add");
+        },
+        toggleModal(active: boolean, title: string, button: string) {
+            this.modal.active = active ? "is-active" : "";
+            this.modal.title = title;
+            this.modal.button = button;
         }
-        
     },
+    components: { Modal }
 }
 </script>
 
