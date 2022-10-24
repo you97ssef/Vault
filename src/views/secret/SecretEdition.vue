@@ -35,7 +35,14 @@
                     <button type="button" class="button is-dark" @click="toggleVisibility('username')">
                         <div class="icon">
                             <i class="fa-solid fa-lg fa-eye" v-if="!usernameVisibility"></i>
-                            <i class="fa-solid fa-eye-slash" v-if="usernameVisibility"></i>
+                            <i class="fa-solid fa-lg fa-eye-slash" v-if="usernameVisibility"></i>
+                        </div>
+                    </button>
+                </div>
+                <div class="control">
+                    <button type="button" class="button is-dark" @click="copy('username')">
+                        <div class="icon">
+                            <i class="fa-solid fa-lg fa-copy"></i>
                         </div>
                     </button>
                 </div>
@@ -55,7 +62,14 @@
                     <button type="button" class="button is-dark" @click="toggleVisibility('secret')">
                         <div class="icon">
                             <i class="fa-solid fa-lg fa-eye" v-if="!passwordVisibility"></i>
-                            <i class="fa-solid fa-eye-slash" v-if="passwordVisibility"></i>
+                            <i class="fa-solid fa-lg fa-eye-slash" v-if="passwordVisibility"></i>
+                        </div>
+                    </button>
+                </div>
+                <div class="control">
+                    <button type="button" class="button is-dark" @click="copy('secret')">
+                        <div class="icon">
+                            <i class="fa-solid fa-lg fa-copy"></i>
                         </div>
                     </button>
                 </div>
@@ -162,6 +176,10 @@ export default {
         toggleVisibility(type: string) {
             if(type == 'username') this.usernameVisibility = !this.usernameVisibility
             else this.passwordVisibility = !this.passwordVisibility
+        },
+        copy(type: string) {
+            navigator.clipboard.writeText(type == 'username' ? this.secret.username : this.secret.secret);
+            console.log('copied successfully!')
         }
     },
     components: { SecretGenerator }
