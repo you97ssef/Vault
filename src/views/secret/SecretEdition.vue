@@ -13,7 +13,7 @@
                 </router-link>
             </div>
         </div>
-        <form class="top-space" @submit.prevent="submit()">
+        <form class="top-space" @submit.prevent="confirm()">
             <div class="field">
                 <label class="label">Topic</label>
                 <div class="control">
@@ -108,6 +108,7 @@
                 </div>
             </div>
         </form>
+        <Modal :state="modal" @submit="submit" @close="toggleModal(false, '', '')"></Modal>
     </div>
 </template>
 
@@ -115,6 +116,7 @@
 import type { Secret } from '@/models/secret';
 import { SecretService } from '@/services/secret-service';
 import SecretGenerator from '@/components/SecretGenerator.vue';
+import Modal from '@/components/Modal.vue';
 
 export default {
     created() {
@@ -154,18 +156,30 @@ export default {
             secret: secret,
             usernameVisibility: false,
             passwordVisibility: false,
+            modal: {
+                active: "",
+                title: "",
+                button: ""
+            }
         };
     },
     methods: {
         deleteSecret() {
-            this.secretRepo.delete(this.$route.params.categoryId, this.secret.id);
-            this.$router.push("/categories/" + this.$route.params.categoryId);
+            this.toggleModal(true, "Delete secret", "Delete");
         },
-        submit() {
-            this.secret.username = this.secretService.encrypt(this.secret.username);
-            this.secret.secret = this.secretService.encrypt(this.secret.secret);
-            this.secretRepo.save(this.$route.params.categoryId, this.secret);
-            this.$router.push("/categories/" + this.$route.params.categoryId);
+        submit(type: string) {
+            if(type == "Delete") {
+                this.secretRepo.delete(this.$route.params.categoryId, this.secret.id);
+                this.$router.push("/categories/" + this.$route.params.categoryId);
+            } else {
+                this.secret.username = this.secretService.encrypt(this.secret.username);
+                this.secret.secret = this.secretService.encrypt(this.secret.secret);
+                this.secretRepo.save(this.$route.params.categoryId, this.secret);
+                this.$router.push("/categories/" + this.$route.params.categoryId);
+            }
+        },
+        confirm() {
+            this.toggleModal(true, this.setting.edition ? "Update secret" : "New secret", this.setting.edition ? "Update" : "Add")
         },
         usernameGenerated(secret: string) {
             this.secret.username = secret
@@ -180,9 +194,14 @@ export default {
         copy(type: string) {
             navigator.clipboard.writeText(type == 'username' ? this.secret.username : this.secret.secret);
             console.log('copied successfully!')
+        },
+        toggleModal(active: boolean, title: string, button: string) {
+            this.modal.active = active ? "is-active" : "";
+            this.modal.title = title;
+            this.modal.button = button
         }
     },
-    components: { SecretGenerator }
+    components: { SecretGenerator, Modal }
 }
 </script>
 
