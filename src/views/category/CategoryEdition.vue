@@ -102,13 +102,16 @@ export default {
             modal: {
                 active: "",
                 title: "",
-                button: ""
+                button: "",
+                alert: null
             }
         };
     },
     methods: {
         deleteCategory() {
-            this.toggleModal(true, "Delete secret", "Delete");
+            let alertMessage = null;
+            if (this.secretRepo.all(this.$route.params.id).length > 0) alertMessage = "This category still has secrets, beware before you delete it!";
+            this.toggleModal(true, "Delete secret", "Delete", alertMessage);
         },
         submit(type: string) {
             if (type == "Delete")
@@ -120,10 +123,11 @@ export default {
         confirm() {
             this.toggleModal(true, this.setting.edition ? "Update category" : "New category", this.setting.edition ? "Update" : "Add");
         },
-        toggleModal(active: boolean, title: string, button: string) {
+        toggleModal(active: boolean, title: string, button: string, alert: any = null) {
             this.modal.active = active ? "is-active" : "";
             this.modal.title = title;
             this.modal.button = button;
+            this.modal.alert = alert;
         }
     },
     components: { Modal }
