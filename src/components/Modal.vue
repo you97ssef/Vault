@@ -11,6 +11,9 @@
             <section class="modal-card-body"
                 :class="state.button == 'Delete' ? 'has-background-danger-light' : (state.button == 'Update' ? 'has-background-warning-light' : 'has-background-link-light')" 
             >
+                <div v-if="state.alert" class="box has-background-danger has-text-danger-light has-text-centered">
+                    {{ state.alert }}
+                </div>
                 <p>Are you sure you want to make this change ?</p>
             </section>
             <footer class="modal-card-foot">

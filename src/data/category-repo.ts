@@ -15,6 +15,10 @@ export class CategoryRepo {
     }
 
     delete(categoryId: number) {
+        for (let i = 1; i <= this.get(categoryId).secrets; i++) {
+            localStorage.removeItem(`secret-${i}-category-${categoryId}`);
+        }
+
         localStorage.removeItem("category-" + categoryId);
     }
 
