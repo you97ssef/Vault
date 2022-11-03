@@ -2,12 +2,18 @@ import Categories from '@/views/category/Categories.vue'
 import CategoryEdition from '@/views/category/CategoryEdition.vue'
 import Secrets from '@/views/secret/Secrets.vue'
 import NotFound from '@/views/NotFound.vue'
+import Setup from '@/views/Setup.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SecretEdition from '@/views/secret/SecretEdition.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/setup',
+      name: 'setup',
+      component: Setup
+    },
     {
       path: '/',
       name: 'home',
