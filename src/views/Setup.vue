@@ -2,7 +2,7 @@
     <div class="has-text-centered top-space">
         <img src="@/assets/vault.svg" alt="empty" width="300">
         <h1 class="title is-1">V A U L T</h1>
-        <h6 class="subtitle is-6">Created by Youssef BAHI.</h6>
+        <h6 class="subtitle is-6">Created by <a href="https://youssefb.netlify.app/">Youssef BAHI</a>.</h6>
         <div class="card has-background-link-light">
             <div class="card-content">
                 <div class="content">
@@ -16,7 +16,9 @@
                     <p class="m-0">Your secrets you have are impossible to be accessed without your key 🔐</p>
                     <p class="m-0">Your secrets will be stored only on your device that means no one will have them. Unless you're device is hacked 🤭</p>
                     <p><small>(Check that your data is not being transmitted elsewhere on the network tab when you inspect your navigator)</small></p>
-                         
+                    
+                    <!-- TODO add link to setup key -->
+
                     <h5 class="mb-1 mt-5">🤔 Why vault, and why should i use it ?</h5>
                     <p class="m-0">Vault is an app that i have created in order to discover <b>Vue 3</b> with <b>Typescript</b> and for personal use.</p>
                     <p class="m-0">I created this app since i don't trust other apps, you can be like me and don't trust/use this app. 😊</p>
@@ -52,6 +54,7 @@
                 </div>
             </div>
         </div>
+        <!-- TODO key setup -->
     </div>
 </template>
 
