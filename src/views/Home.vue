@@ -1,6 +1,6 @@
 <template>
     <div class="has-text-centered top-space">
-        <img src="@/assets/vault.svg" alt="empty" width="300">
+        <img src="@/assets/images/vault.svg" alt="empty" width="300">
         <h1 class="title is-1">V A U L T</h1>
         <h6 class="subtitle is-6">Created by <a href="https://youssefb.netlify.app/">Youssef BAHI</a>.</h6>
         <div class="card has-background-link-light my-5">

@@ -4,7 +4,7 @@ import type { Config } from "./models/config";
 import router from "./router";
 import { CategoryRepo } from "./data/category-repo";
 
-import "./assets/style.sass";
+import "./assets/css/style.sass";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 import { SecretRepo } from "./data/secret-repo";
 

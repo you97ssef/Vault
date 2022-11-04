@@ -39,7 +39,7 @@ export default defineComponent({
             </div>
         </div>
         <div class="has-text-centered top-space" v-if="secrets.length == 0">
-            <img src="@/assets/empty.svg" alt="empty" width="200">
+            <img src="@/assets/images/empty.svg" alt="empty" width="200">
             <h4 class="title is-4 m-2">No Secrets available!!</h4>
             <router-link class="button is-dark" :to="{ name: 'new-secret', params: { categoryId: $route.params.id } }">
                 <span class="icon">
