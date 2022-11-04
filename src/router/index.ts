@@ -5,6 +5,7 @@ import NotFound from '@/views/NotFound.vue'
 import Setup from '@/views/Setup.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SecretEdition from '@/views/secret/SecretEdition.vue'
+import Home from '@/views/Home.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +18,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Categories
+      component: Home
     },
     {
       path: '/categories',

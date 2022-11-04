@@ -6,7 +6,7 @@
                 <h2 class="subtitle">{{ setting.subtitle }}</h2>
             </div>
             <div class="m-2 buttons" v-if="setting.edition">
-                <router-link to="/" class="button is-black is-dark">
+                <router-link to="/categories" class="button is-black is-dark">
                     <span class="icon">
                         <i class="fa-solid fa-lg fa-ban"></i>
                     </span>
@@ -50,7 +50,7 @@
                     </button>
                 </div>
                 <div class="control">
-                    <router-link to="/" class="button is-light">
+                    <router-link to="/categories" class="button is-light">
                         <span class="icon">
                             <i class="fa-solid fa-lg fa-ban"></i>
                         </span>
