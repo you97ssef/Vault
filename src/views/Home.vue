@@ -17,7 +17,7 @@
                     <p class="m-0">Your secrets will be stored only on your device that means no one will have them. Unless you're device is hacked 🤭</p>
                     <p><small>(Check that your data is not being transmitted elsewhere on the network tab when you inspect your navigator)</small></p>
                     
-                    <router-link class="button is-dark" to="new-category">
+                    <router-link class="button is-dark" to="/setup">
                         <span class="icon">
                             <i class="fa-solid fa-key"></i>
                         </span>
