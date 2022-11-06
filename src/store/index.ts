@@ -13,6 +13,9 @@ export default createStore({
     GET_CODE(state) {
       if (state.code) return atob(state.code);
       return null;
+    },
+    DATA_EXISTS(state) {
+      return localStorage.getItem("count");
     }
   },
   mutations: {
