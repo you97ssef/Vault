@@ -84,10 +84,12 @@ export default {
             this.dataService.import(event.target.files[0]);
         },
         clearData() {
-            this.dataService.clear();
-            this.$store.commit("SET_CODE", null);
-            this.$store.commit("SET_DATA", false);
-            this.$router.push("/setup");
+            if (confirm("Are you sure you want to delete all your data?")) {
+                this.dataService.clear();
+                this.$store.commit("SET_CODE", null);
+                this.$store.commit("SET_DATA", false);
+                this.$router.push("/setup");
+            }
         }
     },
     computed: {
