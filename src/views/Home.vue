@@ -17,12 +17,19 @@
                     <p class="m-0">Your secrets will be stored only on your device that means no one will have them. Unless you're device is hacked 🤭</p>
                     <p><small>(Check that your data is not being transmitted elsewhere on the network tab when you inspect your navigator)</small></p>
                     
-                    <router-link class="button is-dark" to="/setup">
+                    <router-link class="button is-dark" to="/setup" v-if="!codeIsSet">
                         <span class="icon">
                             <i class="fa-solid fa-key"></i>
                         </span>
                         <span>Setup your code here</span>
                     </router-link>
+                    <router-link class="button is-dark" to="/categories" v-if="codeIsSet">
+                        <span class="icon">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        </span>
+                        <span>Your key is already set, Access your categories</span>
+                    </router-link>
+
 
                     <h5 class="mb-1 mt-5">🤔 Why vault, and why should i use it ?</h5>
                     <p class="m-0">Vault is an app that i have created in order to discover <b>Vue 3</b> with <b>Typescript</b> and for personal use.</p>
@@ -64,7 +71,11 @@
 
 <script lang="ts">
 export default {
-
+    computed: {
+        codeIsSet() {
+            return this.$store.getters.GET_CODE
+        },
+    },
 }
 </script>
 
