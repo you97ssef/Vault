@@ -36,6 +36,11 @@ export default defineComponent({
                         <i class="fa-solid fa-lg fa-plus"></i>
                     </span>
                 </router-link>
+                <router-link class="button is-black is-light" to="/categories">
+                    <span class="icon">
+                        <i class="fa-solid fa-lg fa-arrow-left-long"></i>
+                    </span>
+                </router-link>
             </div>
         </div>
         <div class="has-text-centered top-space" v-if="secrets.length == 0">
