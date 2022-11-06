@@ -29,5 +29,8 @@ export class DataService {
             location.reload()
         }
     }
-        
+
+    clear() {
+        localStorage.clear()
+    }
 }
