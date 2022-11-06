@@ -4,7 +4,7 @@
             <p class="title is-2 has-text-centered mb-5">{{ secret.topic }}</p>
             <p class="has-text-centered mb-2">
                 <i class="fa-solid fa-user"></i> <b>Username/Email :</b>
-                {{ visibleUsername ? show(secret.username) : '************************' }}
+                {{ visibleUsername ? (show(secret.username) ? show(secret.username) : "The code you set up is maybe wrong!") : '************************' }}
             </p>
             <div class="buttons is-justify-content-center are-small">
                 <button class="button is-rounded is-black" @click="showHideUsername()">
