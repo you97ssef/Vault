@@ -44,7 +44,7 @@ export default defineComponent({
             </div>
         </div>
         <div class="has-text-centered top-space" v-if="categories.length == 0">
-            <img src="@/assets/empty.svg" alt="empty" width="200">
+            <img src="@/assets/images/empty.svg" alt="empty" width="200">
             <h4 class="title is-4 m-2">No categories available!!</h4>
             <router-link class="button is-dark" to="new-category" v-if="!edition">
                 <span class="icon">
