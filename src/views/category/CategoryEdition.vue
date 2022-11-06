@@ -118,7 +118,7 @@ export default {
                 this.categoryRepo.delete(this.category.id);
             else
                 this.categoryRepo.save(this.category);
-            this.$router.push("/");
+            this.$router.push("/categories");
         },
         confirm() {
             this.toggleModal(true, this.setting.edition ? "Update category" : "New category", this.setting.edition ? "Update" : "Add");
