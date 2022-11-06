@@ -1,7 +1,7 @@
 <template>
-    <nav class="footer bottom-top has-background-link-light is-justify-content-center">
+    <div class="footer bottom-top has-background-link-light is-justify-content-center">
         <div class="columns m-0">
-            <div class="column is-multiline is-mobile has-text-centered" v-if="!dataExists">
+            <div class="column is-mobile has-text-centered" v-if="!dataExists">
                 <h6 class="title is-6 m-0">Already have exported your data ?</h6>
                 <p>
                     <small>If you used the app before and exported your data you can import data</small>
@@ -16,20 +16,21 @@
                     </span>
                 </label>
             </div>
-            <div class="column is-multiline is-mobile has-text-centered" v-if="dataExists">
+            <div class="column is-mobile has-text-centered" v-if="dataExists">
                 <h6 class="title is-6 m-0">Export your data into a file</h6>
                 <p>
                     <small>You can export your data and use it in another device</small>
                 </p>
-                <label class="button is-rounded is-dark my-2">
-                    <input class="file-input" type="file" name="resume" @change="importData">
-                    <span class="file-icon ml-1">
-                        <i class="fas fa-download fa-lg"></i>
-                    </span>
-                    <span class="file-label">
-                        Export data
-                    </span>
-                </label>
+                <div class="buttons is-justify-content-center">
+                    <button class="button is-rounded is-dark my-2" @click="exportData()">
+                        <span class="file-icon ml-1">
+                            <i class="fas fa-download fa-lg"></i>
+                        </span>
+                        <span>
+                            Export data
+                        </span>
+                    </button>
+                </div>
             </div>
             <div class="column is-multiline is-mobile has-text-centered">
                 <div class="buttons is-justify-content-center mt-2 m-0">
@@ -62,7 +63,7 @@
             <small class="m-0">by <a href="https://youssefb.netlify.app/">Youssef BAHI</a> - © 2022</small>
             <p></p>
         </div>
-    </nav>
+    </div>
 </template>
 
 <script lang="ts">
