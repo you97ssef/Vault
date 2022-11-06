@@ -147,7 +147,7 @@ export default {
             secret: "",
         };
         return {
-            secretService: new SecretService(this.config),
+            secretService: new SecretService(this.$store.getters.GET_CODE),
             setting: {
                 title: "",
                 subtitle: "",

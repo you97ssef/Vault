@@ -58,7 +58,7 @@ export default defineComponent({
     ],
     data() {
         return {
-            secretService: new SecretService(this.config),
+            secretService: new SecretService(this.$store.getters.GET_CODE),
             visibleUsername: false,
             visibleSecret: false
         };

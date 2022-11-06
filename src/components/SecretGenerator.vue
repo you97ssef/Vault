@@ -43,7 +43,7 @@ import { SecretService } from '@/services/secret-service';
 export default {
     data() {
         return {
-            secretService: new SecretService(this.config),
+            secretService: new SecretService(this.$store.getters.GET_CODE),
             upper: true,
             numbers: true,
             specials: false,
