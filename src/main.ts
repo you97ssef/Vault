@@ -1,21 +1,20 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import type { Config } from "./models/config";
 import router from "./router";
-import { CategoryRepo } from "./data/category-repo";
+import store from './store'
 
 import "./assets/css/style.sass";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+import { CategoryRepo } from "./data/category-repo";
 import { SecretRepo } from "./data/secret-repo";
 
-const app = createApp(App);
+const app = createApp(App).use(store);
 
 app.use(router);
+app.use(store);
 
-const config: Config = { pass: "Secret", pin: null };
-app.config.globalProperties.config = config;
 app.config.globalProperties.categoryRepo = new CategoryRepo();
 app.config.globalProperties.secretRepo = new SecretRepo();
-
 
 app.mount("#app");

@@ -1,19 +1,18 @@
-import type { Config } from "@/models/config";
 import { AES, enc } from 'crypto-ts';
 
 export class SecretService {
-    private config: Config;
+    private code: string;
 
-    constructor(config: Config){
-        this.config = config;
+    constructor(code: string){
+        this.code = code;
     }
 
     encrypt(secret: string){
-        return AES.encrypt(secret, this.config.pass).toString();
+        return AES.encrypt(secret, this.code).toString();
     }
 
     decrypt(encrypted: string){
-        return AES.decrypt(encrypted, this.config.pass).toString(enc.Utf8);
+        return AES.decrypt(encrypted, this.code).toString(enc.Utf8);
     }
 
     generateSecret(length: number = 14, upperCases: boolean = true, numbers: boolean = true, specialCases: boolean = false): string {
