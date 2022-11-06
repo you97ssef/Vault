@@ -19,7 +19,7 @@
             <div class="column is-mobile has-text-centered" v-if="dataExists">
                 <h6 class="title is-6 m-0">Export your data into a file</h6>
                 <p>
-                    <small>You can export your data and use it in another device</small>
+                    <small>You can export your data and use it in another device or delete all your data.</small>
                 </p>
                 <div class="buttons is-justify-content-center">
                     <button class="button is-rounded is-dark my-2" @click="exportData()">
@@ -28,6 +28,14 @@
                         </span>
                         <span>
                             Export data
+                        </span>
+                    </button>
+                    <button class="button is-rounded is-danger my-2" @click="clearData()">
+                        <span class="file-icon ml-1">
+                            <i class="fas fa-trash fa-lg"></i>
+                        </span>
+                        <span>
+                            Delete my data
                         </span>
                     </button>
                 </div>
@@ -70,15 +78,21 @@
 export default {
     methods: {
         exportData() {
-            this.dataService.export()
+            this.dataService.export();
         },
         importData(event: any) {
-            this.dataService.import(event.target.files[0])
+            this.dataService.import(event.target.files[0]);
+        },
+        clearData() {
+            this.dataService.clear();
+            this.$store.commit("SET_CODE", null);
+            this.$store.commit("SET_DATA", false);
+            this.$router.push("/setup");
         }
     },
     computed: {
         dataExists() {
-            return this.$store.getters.DATA_EXISTS
+            return this.$store.getters.DATA_EXISTS;
         },
     },
 }
