@@ -7,7 +7,8 @@ const vuexLocal = new VuexPersistence({
 
 export default createStore({
   state: {
-    code: null
+    code: null,
+    dataExist: false
   },
   getters: {
     GET_CODE(state) {
@@ -15,7 +16,7 @@ export default createStore({
       return null;
     },
     DATA_EXISTS(state) {
-      return localStorage.getItem("count");
+      return state.dataExist;
     }
   },
   mutations: {
@@ -23,6 +24,9 @@ export default createStore({
       if (payload) payload = btoa(payload);
       state.code = payload;
     },
+    SET_DATA(state, payload) {
+      state.dataExist = payload
+    }
   },
   actions: {
   },
