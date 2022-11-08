@@ -42,22 +42,22 @@
             </div>
             <div class="column is-multiline is-mobile has-text-centered">
                 <div class="buttons is-justify-content-center mt-2 m-0">
-                    <a href="mailto:you97ssef@gmail.com" class="button is-dark">
+                    <a href="mailto:you97ssef@gmail.com" class="button is-dark" target="_blank">
                         <span class="icon">
                             <i class="fa-solid fa-lg fa-at"></i>
                         </span>
                     </a>
-                    <a href="https://youssefb.netlify.app/#contact" class="button is-dark">
+                    <a href="https://youssefb.netlify.app/#contact" class="button is-dark" target="_blank">
                         <span class="icon">
                             <i class="fa-regular fa-lg fa-message"></i>
                         </span>
                     </a>
-                    <a href="https://github.com/you97ssef" class="button is-dark">
+                    <a href="https://github.com/you97ssef" class="button is-dark" target="_blank">
                         <span class="icon">
                             <i class="fa-brands fa-lg fa-github"></i>
                         </span>
                     </a>
-                    <a href="https://www.instagram.com/yusefbahi/" class="button is-dark">
+                    <a href="https://www.instagram.com/yusefbahi/" class="button is-dark" target="_blank">
                         <span class="icon">
                             <i class="fa-brands fa-lg fa-instagram"></i>
                         </span>
@@ -68,7 +68,7 @@
         </div>
         <div class="has-text-centered mb-5">
             <h3 class="title is-3 m-0">V A U L T</h3>
-            <small class="m-0">by <a href="https://youssefb.netlify.app/">Youssef BAHI</a> - © 2022</small>
+            <small class="m-0">by <a href="https://youssefb.netlify.app/" target="_blank">Youssef BAHI</a> - © 2022</small>
             <p></p>
         </div>
     </div>

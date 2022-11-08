@@ -2,7 +2,7 @@
     <div class="has-text-centered top-space">
         <img src="@/assets/images/vault.svg" alt="empty" width="300">
         <h1 class="title is-1">V A U L T</h1>
-        <h6 class="subtitle is-6">Created by <a href="https://youssefb.netlify.app/">Youssef BAHI</a>.</h6>
+        <h6 class="subtitle is-6">Created by <a href="https://youssefb.netlify.app/" target="_blank">Youssef BAHI</a>.</h6>
         <div class="card has-background-link-light my-5">
             <div class="card-content">
                 <div class="content">
@@ -37,26 +37,26 @@
                     <p>But if you want to use it ⚠️ <b>use it at your own risk</b> ⚠️</p>
 
                     <h5 class="mb-1 mt-5">🙄 Quite interested in the source code ?</h5>
-                    <p class="m-0">You can find the source code here: <a href="https://github.com/you97ssef/vault">https://github.com/you97ssef/vault</a></p>
+                    <p class="m-0">You can find the source code here: <a href="https://github.com/you97ssef/vault" target="_blank">https://github.com/you97ssef/vault</a></p>
                     <p class="m-0">
                         For any question or suggestion, contact me on the following socials. 
                         <div class="buttons is-justify-content-center m-2">
-                            <a href="mailto:you97ssef@gmail.com" class="button is-link">
+                            <a href="mailto:you97ssef@gmail.com" class="button is-link" target="_blank">
                                 <span class="icon">
                                     <i class="fa-solid fa-lg fa-at"></i>
                                 </span>
                             </a>
-                            <a href="https://youssefb.netlify.app/#contact" class="button is-link">
+                            <a href="https://youssefb.netlify.app/#contact" class="button is-link" target="_blank">
                                 <span class="icon">
                                     <i class="fa-regular fa-lg fa-message"></i>
                                 </span>
                             </a>
-                            <a href="https://github.com/you97ssef" class="button is-link">
+                            <a href="https://github.com/you97ssef" class="button is-link" target="_blank">
                                 <span class="icon">
                                     <i class="fa-brands fa-lg fa-github"></i>
                                 </span>
                             </a>
-                            <a href="https://www.instagram.com/yusefbahi/" class="button is-link">
+                            <a href="https://www.instagram.com/yusefbahi/" class="button is-link" target="_blank">
                                 <span class="icon">
                                     <i class="fa-brands fa-lg fa-instagram"></i>
                                 </span>
