@@ -30,7 +30,7 @@
                             Export data
                         </span>
                     </button>
-                    <button class="button is-rounded is-danger my-2" @click="clearData()">
+                    <button class="button is-rounded is-danger my-2" @click="toggleModal(true, 'Delete my data', 'Delete', '⚠️ ⚠️ ⚠️ Be aware that you will lose all your data, you can export it before you delete everything. ⚠️ ⚠️ ⚠️')">
                         <span class="file-icon ml-1">
                             <i class="fas fa-trash fa-lg"></i>
                         </span>
@@ -71,11 +71,28 @@
             <small class="m-0">by <a href="https://youssefb.netlify.app/" target="_blank">Youssef BAHI</a> - © 2022</small>
             <p></p>
         </div>
+        
+        <Modal :state="modal" @submit="clearData" @close="toggleModal(false, '', '')"></Modal>
     </div>
 </template>
 
 <script lang="ts">
+import Modal from '@/components/Modal.vue';
+
 export default {
+    components: {
+        Modal
+    },
+    data() {
+        return {
+            modal: {
+                active: "",
+                title: "",
+                button: "",
+                alert: null
+            }
+        }
+    },
     methods: {
         exportData() {
             this.dataService.export();
@@ -90,6 +107,13 @@ export default {
                 this.$store.commit("SET_DATA", false);
                 this.$router.push("/setup");
             }
+            this.toggleModal(false, '', '');
+        },
+        toggleModal(active: boolean, title: string, button: string, alert: any = null) {
+            this.modal.active = active ? "is-active" : "";
+            this.modal.title = title;
+            this.modal.button = button;
+            this.modal.alert = alert;
         }
     },
     computed: {
