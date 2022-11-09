@@ -7,12 +7,16 @@ const vuexLocal = new VuexPersistence({
 
 export default createStore({
   state: {
-    code: null
+    code: null,
+    dataExist: false
   },
   getters: {
     GET_CODE(state) {
       if (state.code) return atob(state.code);
       return null;
+    },
+    DATA_EXISTS(state) {
+      return state.dataExist;
     }
   },
   mutations: {
@@ -20,6 +24,9 @@ export default createStore({
       if (payload) payload = btoa(payload);
       state.code = payload;
     },
+    SET_DATA(state, payload) {
+      state.dataExist = payload
+    }
   },
   actions: {
   },
