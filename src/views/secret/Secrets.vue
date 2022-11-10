@@ -47,15 +47,15 @@ import Secret from "@/components/Secret.vue";
 export default defineComponent({
     data() {
         return {
-            category: {},
-            secrets: []
+            category: {} as any,
+            secrets: [] as any[]
         };
     },
     created() {
-        let category = this.categoryRepo.get(this.$route.params.id);
+        let category = this.$categoryRepo.get(this.$route.params.id);
         if (category) {
             this.category = category;
-            this.secrets = this.secretRepo.all(this.$route.params.id)
+            this.secrets = this.$secretRepo.all(this.$route.params.id)
         }
         else this.$router.push('/404');
     },

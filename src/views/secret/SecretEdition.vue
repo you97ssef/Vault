@@ -130,7 +130,7 @@ export default defineComponent({
         else {
             this.setting.title = "Edit";
             this.setting.subtitle = "Edit/Delete your secret.";
-            let secret = this.secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
+            let secret = this.$secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
             if (secret) {
                 this.secret = secret;
                 this.secret.username = this.secretService.decrypt(this.secret.username);
@@ -170,12 +170,12 @@ export default defineComponent({
         },
         submit(type: string) {
             if(type == "Delete") {
-                this.secretRepo.delete(this.$route.params.categoryId, this.secret.id);
+                this.$secretRepo.delete(this.$route.params.categoryId, this.secret.id);
                 this.$router.push("/categories/" + this.$route.params.categoryId);
             } else {
                 this.secret.username = this.secretService.encrypt(this.secret.username);
                 this.secret.secret = this.secretService.encrypt(this.secret.secret);
-                this.secretRepo.save(this.$route.params.categoryId, this.secret);
+                this.$secretRepo.save(this.$route.params.categoryId, this.secret);
                 this.$router.push("/categories/" + this.$route.params.categoryId);
             }
         },

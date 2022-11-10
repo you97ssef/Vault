@@ -47,7 +47,7 @@ import Category from "../../components/Category.vue";
 export default defineComponent({
     data() {
         return {
-            categories: [],
+            categories: [] as any[],
             edition: false
         };
     },
@@ -58,7 +58,7 @@ export default defineComponent({
         }
     },
     created() {
-        this.categories = this.categoryRepo.all()
+        this.categories = this.$categoryRepo.all()
     }
 });
 </script>

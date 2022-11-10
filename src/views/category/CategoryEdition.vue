@@ -79,7 +79,7 @@ export default defineComponent({
         else {
             this.setting.title = "Edit";
             this.setting.subtitle = "Edit/Delete your category that regroup your secrets.";
-            let category = this.categoryRepo.get(this.$route.params.id);
+            let category = this.$categoryRepo.get(this.$route.params.id);
             if (category)
                 this.category = category;
             else
@@ -87,19 +87,18 @@ export default defineComponent({
         }
     },
     data() {
-        let category: Category = {
-            id: null,
-            name: "",
-            description: "",
-            secrets: 0
-        };
         return {
             setting: {
                 title: "",
                 subtitle: "",
                 edition: true
             },
-            category: category,
+            category: {
+                id: null,
+                name: "",
+                description: "",
+                secrets: 0
+            } as Category,
             modal: {
                 active: "",
                 title: "",
@@ -111,14 +110,14 @@ export default defineComponent({
     methods: {
         deleteCategory() {
             let alertMessage = null;
-            if (this.secretRepo.all(this.$route.params.id).length > 0) alertMessage = "This category still has secrets, beware before you delete it!";
+            if (this.$secretRepo.all(this.$route.params.id).length > 0) alertMessage = "This category still has secrets, beware before you delete it!";
             this.toggleModal(true, "Delete secret", "Delete", alertMessage);
         },
         submit(type: string) {
             if (type == "Delete")
-                this.categoryRepo.delete(this.category.id);
+                this.$categoryRepo.delete(this.category.id);
             else
-                this.categoryRepo.save(this.category);
+                this.$categoryRepo.save(this.category);
             this.$router.push("/categories");
         },
         confirm() {
