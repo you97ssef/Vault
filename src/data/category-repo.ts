@@ -1,7 +1,7 @@
 import type { Category } from "@/models/category";
 
 export class CategoryRepo {
-    get(categoryId: number) {
+    get(categoryId: any) {
         let category = localStorage.getItem("category-" + categoryId);
 
         if (category) return JSON.parse(category);
@@ -14,7 +14,7 @@ export class CategoryRepo {
         localStorage.setItem("category-" + category.id, JSON.stringify(category));
     }
 
-    delete(categoryId: number) {
+    delete(categoryId: any) {
         for (let i = 1; i <= this.get(categoryId).secrets; i++) {
             localStorage.removeItem(`secret-${i}-category-${categoryId}`);
         }

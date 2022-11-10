@@ -1,7 +1,7 @@
 import type { Secret } from "@/models/secret";
 
 export class SecretRepo {
-    get(categoryId: number, secretId: number) {
+    get(categoryId: any, secretId: any) {
         let secret = localStorage.getItem(`secret-${secretId}-category-${categoryId}`);
 
         if (secret) return JSON.parse(secret);
@@ -9,16 +9,16 @@ export class SecretRepo {
         return null;
     }
 
-    save(categoryId: number, secret: Secret) {
+    save(categoryId: any, secret: Secret) {
         if(!secret.id) secret.id = this.newId(categoryId);
         localStorage.setItem(`secret-${secret.id}-category-${categoryId}`, JSON.stringify(secret));
     }
 
-    delete(categoryId: number, secretId: number) {
+    delete(categoryId: any, secretId: any) {
         localStorage.removeItem(`secret-${secretId}-category-${categoryId}`);
     }
 
-    all(categoryId: number) {
+    all(categoryId: any) {
         let secrets = [];
 
         for (let i = 1; i <= this.countSecrets(categoryId); i++) {
@@ -30,14 +30,14 @@ export class SecretRepo {
         return secrets;
     }
 
-    private countSecrets(categoryId: number): number
+    private countSecrets(categoryId: any): number
     {
         let category = localStorage.getItem("category-" + categoryId)!;
 
         return JSON.parse(category).secrets;
     }
 
-    private newId(categoryId: number): number {
+    private newId(categoryId: any): number {
         let category = JSON.parse(localStorage.getItem("category-" + categoryId)!)
         category.secrets ++;
         localStorage.setItem("category-" + categoryId, JSON.stringify(category))
