@@ -35,7 +35,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
     props:["state"],
     methods: {
         close() {
@@ -45,9 +47,9 @@ export default {
             this.$emit("submit", this.state.button)
         }
     }
-}
+})
 </script>
 
-<style>
+<style scoped>
 
 </style>

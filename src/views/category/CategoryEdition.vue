@@ -64,10 +64,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import Modal from '@/components/Modal.vue';
 import type { Category } from '@/models/category';
 
-export default {
+export default defineComponent({
     created() {
         // setting page settings depending on the route
         if (this.$route.name == "new-category") {
@@ -131,7 +132,7 @@ export default {
         }
     },
     components: { Modal }
-}
+})
 </script>
 
 <style>

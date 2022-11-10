@@ -1,27 +1,3 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import Secret from "../../components/Secret.vue";
-import Category from "../../components/Category.vue";
-
-export default defineComponent({
-    data() {
-        return {
-            categories: [],
-            edition: false
-        };
-    },
-    components: { Secret, Category },
-    methods:{
-        toggleEdition() {
-            this.edition = !this.edition
-        }
-    },
-    created() {
-        this.categories = this.categoryRepo.all()
-    }
-});
-</script>
-
 <template>
     <main>
         <div class="is-flex is-justify-content-space-between mb-5">
@@ -62,6 +38,30 @@ export default defineComponent({
         </div>
     </main>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import Secret from "../../components/Secret.vue";
+import Category from "../../components/Category.vue";
+
+export default defineComponent({
+    data() {
+        return {
+            categories: [],
+            edition: false
+        };
+    },
+    components: { Secret, Category },
+    methods:{
+        toggleEdition() {
+            this.edition = !this.edition
+        }
+    },
+    created() {
+        this.categories = this.categoryRepo.all()
+    }
+});
+</script>
 
 <style scoped>
 .top-space {

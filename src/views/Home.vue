@@ -70,13 +70,15 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
     computed: {
         codeIsSet() {
             return this.$store.getters.GET_CODE
         },
     },
-}
+})
 </script>
 
 <style scoped>

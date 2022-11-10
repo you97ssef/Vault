@@ -113,12 +113,13 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import type { Secret } from '@/models/secret';
 import { SecretService } from '@/services/secret-service';
 import SecretGenerator from '@/components/SecretGenerator.vue';
 import Modal from '@/components/Modal.vue';
 
-export default {
+export default defineComponent({
     created() {
         // setting page settings depending on the route
         if (this.$route.name == "new-secret") {
@@ -202,7 +203,7 @@ export default {
         }
     },
     components: { SecretGenerator, Modal }
-}
+})
 </script>
 
 <style>

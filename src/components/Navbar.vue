@@ -18,7 +18,9 @@
 
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
     methods: {
         unsetCode() {
             this.$store.commit("SET_CODE", null);
@@ -30,10 +32,10 @@ export default {
             return this.$store.getters.GET_CODE
         },
     },
-}
+})
 </script>
 
-<style>
+<style scoped>
 .bottom-border {
   border-bottom: .2em black solid;
 }

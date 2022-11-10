@@ -15,6 +15,17 @@
     </router-link>
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+    props:[
+        "category",
+        "edition"
+    ],
+});
+</script>
+
 <style scoped>
 .card {
     border: .2em black solid;
@@ -27,14 +38,3 @@
   border-color: #52616b !important;
 }
 </style>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-    props:[
-        "category",
-        "edition"
-    ],
-});
-</script>

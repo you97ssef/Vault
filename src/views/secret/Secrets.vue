@@ -1,26 +1,3 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import Secret from "@/components/Secret.vue";
-
-export default defineComponent({
-    data() {
-        return {
-            category: {},
-            secrets: []
-        };
-    },
-    created() {
-        let category = this.categoryRepo.get(this.$route.params.id);
-        if (category) {
-            this.category = category;
-            this.secrets = this.secretRepo.all(this.$route.params.id)
-        }
-        else this.$router.push('/404');
-    },
-    components: { Secret }
-});
-</script>
-
 <template>
     <main>
         <div class="is-flex is-justify-content-space-between mb-5">
@@ -62,6 +39,29 @@ export default defineComponent({
         </div>
     </main>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import Secret from "@/components/Secret.vue";
+
+export default defineComponent({
+    data() {
+        return {
+            category: {},
+            secrets: []
+        };
+    },
+    created() {
+        let category = this.categoryRepo.get(this.$route.params.id);
+        if (category) {
+            this.category = category;
+            this.secrets = this.secretRepo.all(this.$route.params.id)
+        }
+        else this.$router.push('/404');
+    },
+    components: { Secret }
+});
+</script>
 
 <style scoped>
 .top-space {

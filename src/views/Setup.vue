@@ -19,7 +19,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
     methods: {
         setSecret() {
             this.$store.commit("SET_CODE", this.code);
@@ -32,7 +34,7 @@ export default {
             code: null
         }
     }
-}
+})
 </script>
 
 <style scoped>

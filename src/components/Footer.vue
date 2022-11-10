@@ -77,9 +77,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import Modal from '@/components/Modal.vue';
 
-export default {
+export default defineComponent({
     components: {
         Modal
     },
@@ -121,7 +122,7 @@ export default {
             return this.$store.getters.DATA_EXISTS;
         },
     },
-}
+})
 </script>
 
 <style scoped>

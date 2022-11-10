@@ -39,8 +39,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import { SecretService } from '@/services/secret-service';
-export default {
+
+export default defineComponent({
     data() {
         return {
             secretService: new SecretService(this.$store.getters.GET_CODE),
@@ -60,7 +62,7 @@ export default {
             this.$emit('secret', this.secretService.generateSecret(this.length, this.upper, this.numbers, this.specials))
         }
     },
-}
+})
 </script>
 
 <style scoped>

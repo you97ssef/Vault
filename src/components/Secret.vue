@@ -42,12 +42,6 @@
     </div>
 </template>
 
-<style scoped>
-.card {
-    border: .2em black solid;
-}
-</style>
-
 <script lang="ts">
 import { SecretService } from "@/services/secret-service";
 import { defineComponent } from "vue";
@@ -80,3 +74,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style scoped>
+.card {
+    border: .2em black solid;
+}
+</style>
