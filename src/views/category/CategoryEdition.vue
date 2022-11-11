@@ -67,6 +67,7 @@
 import { defineComponent } from "vue";
 import Modal from '@/components/Modal.vue';
 import type { Category } from '@/models/category';
+import type { ModalState } from "@/models/modal-state";
 
 export default defineComponent({
     created() {
@@ -104,7 +105,7 @@ export default defineComponent({
                 title: "",
                 button: "",
                 alert: null
-            }
+            } as ModalState
         };
     },
     methods: {

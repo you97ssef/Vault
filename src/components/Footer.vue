@@ -77,6 +77,7 @@
 </template>
 
 <script lang="ts">
+import type { ModalState } from '@/models/modal-state';
 import { defineComponent } from 'vue';
 import Modal from '@/components/Modal.vue';
 
@@ -91,7 +92,7 @@ export default defineComponent({
                 title: "",
                 button: "",
                 alert: null
-            }
+            } as ModalState
         }
     },
     methods: {

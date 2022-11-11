@@ -118,6 +118,7 @@ import type { Secret } from '@/models/secret';
 import { SecretService } from '@/services/secret-service';
 import SecretGenerator from '@/components/SecretGenerator.vue';
 import Modal from '@/components/Modal.vue';
+import type { ModalState } from "@/models/modal-state";
 
 export default defineComponent({
     created() {
@@ -161,7 +162,7 @@ export default defineComponent({
                 active: "",
                 title: "",
                 button: ""
-            }
+            } as ModalState
         };
     },
     methods: {
