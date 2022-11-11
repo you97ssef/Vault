@@ -10,8 +10,11 @@ export class CategoryRepo {
     }
 
     save(category: Category) {
-        if(!category.id) category.id = this.newId();
-        localStorage.setItem("category-" + category.id, JSON.stringify(category));
+        if (!category.id) category.id = this.newId();
+        localStorage.setItem(
+            "category-" + category.id,
+            JSON.stringify(category)
+        );
     }
 
     delete(categoryId: any) {
@@ -34,24 +37,25 @@ export class CategoryRepo {
         return categories;
     }
 
-    private countCategories(): number
-    {
-        let countString = localStorage.getItem("count")
+    private countCategories(): number {
+        let countString = localStorage.getItem("count");
 
-        if(!countString) {
-            localStorage.setItem("count", JSON.stringify({
-                categories:0,
-            }))
+        if (!countString) {
+            localStorage.setItem(
+                "count",
+                JSON.stringify({
+                    categories: 0,
+                })
+            );
 
-            return 0
-        }
-        else return JSON.parse(countString).categories;
+            return 0;
+        } else return JSON.parse(countString).categories;
     }
 
     private newId(): number {
-        let count = JSON.parse(localStorage.getItem("count")!)
-        count.categories ++;
-        localStorage.setItem("count", JSON.stringify(count))
+        let count = JSON.parse(localStorage.getItem("count")!);
+        count.categories++;
+        localStorage.setItem("count", JSON.stringify(count));
         return count.categories;
     }
 }

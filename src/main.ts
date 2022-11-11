@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from './store'
+import store from "./store";
 import type { Store } from "vuex";
 
 import "./assets/css/style.sass";
@@ -17,12 +17,12 @@ const app = createApp(App);
 app.use(router);
 app.use(store);
 
-declare module 'vue' {
+declare module "vue" {
     interface ComponentCustomProperties {
-        $dataService: DataService,
-        $categoryRepo: CategoryRepo,
-        $secretRepo: SecretRepo,
-        $store: Store<any>
+        $dataService: DataService;
+        $categoryRepo: CategoryRepo;
+        $secretRepo: SecretRepo;
+        $store: Store<any>;
     }
 }
 
