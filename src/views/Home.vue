@@ -70,17 +70,19 @@
 </template>
 
 <script lang="ts">
-export default {
-    computed: {
-        codeIsSet() {
-            return this.$store.getters.GET_CODE
-        },
-    },
-}
+import { defineComponent } from "vue";
+
+export default defineComponent({
+	computed: {
+		codeIsSet() {
+			return this.$store.getters.GET_CODE;
+		}
+	}
+});
 </script>
 
 <style scoped>
 .top-space {
-    margin-top: 3em;
+	margin-top: 3em;
 }
 </style>

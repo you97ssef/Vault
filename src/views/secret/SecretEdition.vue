@@ -113,12 +113,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import type { Secret } from '@/models/secret';
 import { SecretService } from '@/services/secret-service';
 import SecretGenerator from '@/components/SecretGenerator.vue';
 import Modal from '@/components/Modal.vue';
+import type { ModalState } from "@/models/modal-state";
 
-export default {
+export default defineComponent({
     created() {
         // setting page settings depending on the route
         if (this.$route.name == "new-secret") {
@@ -129,7 +131,7 @@ export default {
         else {
             this.setting.title = "Edit";
             this.setting.subtitle = "Edit/Delete your secret.";
-            let secret = this.secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
+            let secret = this.$secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
             if (secret) {
                 this.secret = secret;
                 this.secret.username = this.secretService.decrypt(this.secret.username);
@@ -160,7 +162,7 @@ export default {
                 active: "",
                 title: "",
                 button: ""
-            }
+            } as ModalState
         };
     },
     methods: {
@@ -169,12 +171,12 @@ export default {
         },
         submit(type: string) {
             if(type == "Delete") {
-                this.secretRepo.delete(this.$route.params.categoryId, this.secret.id);
+                this.$secretRepo.delete(this.$route.params.categoryId, this.secret.id);
                 this.$router.push("/categories/" + this.$route.params.categoryId);
             } else {
                 this.secret.username = this.secretService.encrypt(this.secret.username);
                 this.secret.secret = this.secretService.encrypt(this.secret.secret);
-                this.secretRepo.save(this.$route.params.categoryId, this.secret);
+                this.$secretRepo.save(this.$route.params.categoryId, this.secret);
                 this.$router.push("/categories/" + this.$route.params.categoryId);
             }
         },
@@ -202,7 +204,7 @@ export default {
         }
     },
     components: { SecretGenerator, Modal }
-}
+})
 </script>
 
 <style>
