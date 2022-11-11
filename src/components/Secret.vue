@@ -43,13 +43,17 @@
 </template>
 
 <script lang="ts">
+import type { Secret } from "@/models/secret";
 import { SecretService } from "@/services/secret-service";
-import { defineComponent } from "vue";
+import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({
-    props:[
-        "secret"
-    ],
+    props: {
+        secret: {
+            type: Object as PropType<Secret>,
+            required: true
+        },
+    },
     data() {
         return {
             secretService: new SecretService(this.$store.getters.GET_CODE),

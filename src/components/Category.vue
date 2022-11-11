@@ -16,13 +16,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import type { Category } from "@/models/category";
+import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({
-    props:[
-        "category",
-        "edition"
-    ],
+    props: {
+        category: {
+            type: Object as PropType<Category>,
+            required: true
+        },
+        edition: {
+            type: Boolean,
+            required: true
+        }
+    }
 });
 </script>
 

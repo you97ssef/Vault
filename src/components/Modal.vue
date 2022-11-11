@@ -35,10 +35,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import type { ModalState } from '@/models/modal-state';
+import { defineComponent, type PropType } from 'vue';
 
 export default defineComponent({
-    props:["state"],
+    props: {
+        state: {
+            type: Object as PropType<ModalState>,
+            required: true
+        },
+    },
     methods: {
         close() {
             this.$emit("close", "")
