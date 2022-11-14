@@ -8,6 +8,7 @@ import Setup from "@/views/Setup.vue";
 import Home from "@/views/Home.vue";
 
 import NotFound from "@/views/NotFound.vue";
+import Generator from "@/views/Generator.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
@@ -31,6 +32,11 @@ function unSet(to: any, from: any, next: any) {
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
+        {
+            path: "/generator",
+            name: "generator",
+            component: Generator,
+        },
         {
             path: "/setup",
             name: "setup",
