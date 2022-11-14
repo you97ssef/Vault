@@ -1,8 +1,8 @@
 <template>
     <div class="has-text-centered">
         <img src="@/assets/images/password.svg" alt="empty" width="200" />
-		<h3 class="title is-3">Generate secret or password</h3>
-		<h5 class="subtitle is-5">Generate your secret/password in a secure way, using special characters, small/big cases and numbers!</h5>
+		<h3 class="title is-3">Generate secret/password</h3>
+		<h5 class="subtitle is-5">Generate your secret in a secure way, using special characters, small/big cases and numbers!</h5>
         <div class="card has-background-link-light mb-5">
 		    <div class="card-content is-flex is-justify-content-space-between">
                 <p class="subtitle m-2">
@@ -25,6 +25,8 @@
         
         <div class="card has-background-link-light">
 		    <div class="card-content">
+                <h4 class="title is-4">Setup your secret/password</h4>
+                <h6 class="subtitle is-6">Change the settings of your secret by enabling/disabling the options bellow and changing the length of it.</h6>
                 <div class="buttons is-justify-content-center m-0">
                     <button class="button"
                         :class="upper ? 'is-dark' : 'is-white'"
@@ -72,7 +74,7 @@
                             <i class="fa-solid fa-rotate"></i>
                         </div>
                         <span>
-                            Generate password
+                            Generate secret
                         </span>
                     </button>
                     <button class="button is-dark" @click="copySecret()">
