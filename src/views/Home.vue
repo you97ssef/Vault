@@ -63,6 +63,20 @@
                             </a>
                         </div>
                     </p>
+
+                    <h5 class="mb-1 mt-5">Don't want to use the app</h5>
+                    <p class="m-1">Well just check out the Secret/Password generator.</p>
+                    <div class="buttons is-justify-content-center">
+                        <router-link
+                            class="button is-rounded is-dark"
+                            to="/generator"
+                        >
+                            <span class="icon ml-1"
+                                ><i class="fa-solid fa-rotate fa-lg"></i
+                            ></span>
+                            <span>Secret/Password generator</span>
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
