@@ -108,6 +108,16 @@
 					</a>
 				</div>
 				<h6 class="title is-6">Contact me</h6>
+				<p>
+					<small class="m-1">Check out the secret/password generator</small>
+				</p>
+				<router-link
+					class="button is-rounded is-link is-small"
+					to="/generator"
+				>
+					<span class="icon ml-1"><i class="fa-solid fa-rotate fa-lg"></i></span>
+					<span>Secret/Password generator</span>
+				</router-link>
 			</div>
 		</div>
 		<div class="has-text-centered mb-5">
