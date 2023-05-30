@@ -52,6 +52,12 @@ import { defineComponent } from "vue";
 import { SecretService } from "@/services/secret-service";
 
 export default defineComponent({
+	props: {
+		i: {
+			type: Number,
+			required: true
+		}
+	},
 	data() {
 		return {
 			secretService: new SecretService(this.$store.getters.GET_CODE),
@@ -69,13 +75,15 @@ export default defineComponent({
 		},
 		generateSecret() {
 			this.$emit(
-				"secret",
-				this.secretService.generateSecret(
-					this.length,
-					this.upper,
-					this.numbers,
-					this.specials
-				)
+				"secret", {
+					value: this.secretService.generateSecret(
+						this.length,
+						this.upper,
+						this.numbers,
+						this.specials
+					),
+					i : this.i
+				}
 			);
 		}
 	}

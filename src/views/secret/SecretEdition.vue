@@ -20,61 +20,65 @@
                     <input class="input" type="text" placeholder="Secret topic ..." v-model="secret.topic" required>
                 </div>
             </div>
-            <label class="label">Username/Email</label>
-            <div class="field is-grouped">
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        :type="usernameVisibility ? 'text' : 'password'" 
-                        placeholder="Username ..." 
-                        v-model="secret.username"
-                        required
-                    >
+
+            <div v-for="(v, i) in secret.values" :key="i">
+                <label class="label">Value</label>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input 
+                            class="input" 
+                            type="text"
+                            placeholder="Label..." 
+                            v-model="v.label"
+                            required
+                        >
+                    </div>
+                    <div class="control is-expanded">
+                        <input 
+                            class="input" 
+                            :type="secretsVisibility[i] ? 'text' : 'password'" 
+                            placeholder="Secret..." 
+                            v-model="v.value"
+                            required
+                        >
+                    </div>
+                    <div class="control">
+                        <button type="button" class="button is-dark" @click="toggleVisibility(i)">
+                            <div class="icon">
+                                <i class="fa-solid fa-lg fa-eye" v-if="!secretsVisibility[i]"></i>
+                                <i class="fa-solid fa-lg fa-eye-slash" v-if="secretsVisibility[i]"></i>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <button type="button" class="button is-dark" @click="copy(v)">
+                            <div class="icon">
+                                <i class="fa-solid fa-lg fa-copy"></i>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <button type="button" class="button is-danger is-light" @click="deleteValue(i)">
+                            <div class="icon">
+                                <i class="fa-regular fa-lg fa-trash-can"></i>
+                            </div>
+                        </button>
+                    </div>
                 </div>
+                <SecretGenerator :i="i" @secret="secretGenerated"></SecretGenerator>
+            </div>
+
+            <div class="field is-grouped is-justify-content-center">
                 <div class="control">
-                    <button type="button" class="button is-dark" @click="toggleVisibility('username')">
-                        <div class="icon">
-                            <i class="fa-solid fa-lg fa-eye" v-if="!usernameVisibility"></i>
-                            <i class="fa-solid fa-lg fa-eye-slash" v-if="usernameVisibility"></i>
-                        </div>
-                    </button>
-                </div>
-                <div class="control">
-                    <button type="button" class="button is-dark" @click="copy('username')">
-                        <div class="icon">
-                            <i class="fa-solid fa-lg fa-copy"></i>
-                        </div>
+                    <button type="button" class="button is-rounded is-primary is-light" @click="addNewValue()">
+                        <span class="icon">
+                            <i class="fa-solid fa-lg fa-plus"></i>
+                        </span>
+                        <span>Add Value</span>
                     </button>
                 </div>
             </div>
-            <SecretGenerator @secret="usernameGenerated"></SecretGenerator>
-            <label class="label">Secret/Password</label>
-            <div class="field is-grouped">
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        :type="passwordVisibility ? 'text' : 'password'" 
-                        placeholder="Secret ..." 
-                        v-model="secret.secret"
-                    >
-                </div>
-                <div class="control">
-                    <button type="button" class="button is-dark" @click="toggleVisibility('secret')">
-                        <div class="icon">
-                            <i class="fa-solid fa-lg fa-eye" v-if="!passwordVisibility"></i>
-                            <i class="fa-solid fa-lg fa-eye-slash" v-if="passwordVisibility"></i>
-                        </div>
-                    </button>
-                </div>
-                <div class="control">
-                    <button type="button" class="button is-dark" @click="copy('secret')">
-                        <div class="icon">
-                            <i class="fa-solid fa-lg fa-copy"></i>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <SecretGenerator @secret="secretGenerated"></SecretGenerator>
+
             <div class="field is-grouped">
                 <div class="control">
                     <button class="button" 
@@ -115,6 +119,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { Secret } from '@/models/secret';
+import type { SecretValue } from '@/models/secret-value';
 import { SecretService } from '@/services/secret-service';
 import SecretGenerator from '@/components/SecretGenerator.vue';
 import Modal from '@/components/Modal.vue';
@@ -127,15 +132,17 @@ export default defineComponent({
             this.setting.title = "New";
             this.setting.subtitle = "Add a new secret of your secrets.";
             this.setting.edition = false;
+            this.addNewValue();
         }
         else {
             this.setting.title = "Edit";
             this.setting.subtitle = "Edit/Delete your secret.";
-            let secret = this.$secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
+            let secret: Secret = this.$secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
             if (secret) {
                 this.secret = secret;
-                this.secret.username = this.secretService.decrypt(this.secret.username);
-                this.secret.secret = this.secretService.decrypt(this.secret.secret);
+                for (const v of secret.values) {
+                    v.value = this.secretService.decrypt(v.value);
+                }
             }
             else
                 this.$router.push("/404");
@@ -145,8 +152,7 @@ export default defineComponent({
         let secret: Secret = {
             id: null,
             topic: "",
-            username: "",
-            secret: "",
+            values: []
         };
         return {
             secretService: new SecretService(this.$store.getters.GET_CODE),
@@ -156,8 +162,8 @@ export default defineComponent({
                 edition: true
             },
             secret: secret,
-            usernameVisibility: false,
-            passwordVisibility: false,
+            secretsVisibility: [] as any[],
+            indexToDelete: 0 as number,
             modal: {
                 active: "",
                 title: "",
@@ -171,11 +177,18 @@ export default defineComponent({
         },
         submit(type: string) {
             if(type == "Delete") {
-                this.$secretRepo.delete(this.$route.params.categoryId, this.secret.id);
-                this.$router.push("/categories/" + this.$route.params.categoryId);
+                if (this.modal.title == "Delete value") {
+                    this.secret.values.splice(this.indexToDelete, 1)
+                    this.toggleModal(false, '', '')
+                } else {
+                    this.$secretRepo.delete(this.$route.params.categoryId, this.secret.id);
+                    this.$router.push("/categories/" + this.$route.params.categoryId);
+                }
             } else {
-                this.secret.username = this.secretService.encrypt(this.secret.username);
-                this.secret.secret = this.secretService.encrypt(this.secret.secret);
+                this.secret.values = this.secret.values.map((v: SecretValue) => {
+                    v.value = this.secretService.encrypt(v.value);
+                    return v;
+                })
                 this.$secretRepo.save(this.$route.params.categoryId, this.secret);
                 this.$router.push("/categories/" + this.$route.params.categoryId);
             }
@@ -183,24 +196,28 @@ export default defineComponent({
         confirm() {
             this.toggleModal(true, this.setting.edition ? "Update secret" : "New secret", this.setting.edition ? "Update" : "Add")
         },
-        usernameGenerated(secret: string) {
-            this.secret.username = secret
+        secretGenerated(secret: any) {
+            this.secret.values[secret.i].value = secret.value
         },
-        secretGenerated(secret: string) {
-            this.secret.secret = secret
+        toggleVisibility(i: number) {
+            this.secretsVisibility[i] = !this.secretsVisibility[i]
         },
-        toggleVisibility(type: string) {
-            if(type == 'username') this.usernameVisibility = !this.usernameVisibility
-            else this.passwordVisibility = !this.passwordVisibility
-        },
-        copy(type: string) {
-            navigator.clipboard.writeText(type == 'username' ? this.secret.username : this.secret.secret);
+        copy(v: SecretValue) {
+            navigator.clipboard.writeText(v.value);
             console.log('copied successfully!')
         },
         toggleModal(active: boolean, title: string, button: string) {
             this.modal.active = active ? "is-active" : "";
             this.modal.title = title;
             this.modal.button = button
+        },
+        addNewValue() {
+            this.secret.values.push({ label: "", value: "" })
+            this.secretsVisibility.push(false)
+        },
+        deleteValue(i: number) {
+            this.indexToDelete = i
+            this.toggleModal(true, "Delete value", "Delete");
         }
     },
     components: { SecretGenerator, Modal }
