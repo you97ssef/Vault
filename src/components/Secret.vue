@@ -2,53 +2,32 @@
 	<div class="card has-background-link-light">
 		<div class="card-content">
 			<p class="title is-2 has-text-centered mb-5">{{ secret.topic }}</p>
-			<p class="has-text-centered mb-2">
-				<i class="fa-solid fa-user"></i> <b>Username/Email :</b>
-				{{
-					visibleUsername
-						? show(secret.username)
-							? show(secret.username)
-							: "The code you set up is maybe wrong!"
-						: "************************"
-				}}
-			</p>
-			<div class="buttons is-justify-content-center are-small">
-				<button
-					class="button is-rounded is-black"
-					@click="showHideUsername()"
-				>
-					<i class="fa-solid fa-eye" v-if="!visibleUsername"></i>
-					<i class="fa-solid fa-eye-slash" v-if="visibleUsername"></i>
-				</button>
-				<button
-					class="button is-rounded is-dark"
-					@click="copy(show(secret.username))"
-				>
-					<i class="fa-solid fa-copy"></i>
-				</button>
-			</div>
-			<p class="has-text-centered mb-2">
-				<i class="fa-solid fa-key"></i> <b>Password/Secret :</b>
-				{{
-					visibleSecret
-						? show(secret.secret)
-						: "************************"
-				}}
-			</p>
-			<div class="buttons is-justify-content-center are-small">
-				<button
-					class="button is-rounded is-black"
-					@click="showHideSecret()"
-				>
-					<i class="fa-solid fa-eye" v-if="!visibleSecret"></i>
-					<i class="fa-solid fa-eye-slash" v-if="visibleSecret"></i>
-				</button>
-				<button
-					class="button is-rounded is-dark"
-					@click="copy(show(secret.secret))"
-				>
-					<i class="fa-solid fa-copy"></i>
-				</button>
+			<div v-for="(v, i) in secret.values" :key="i">
+				<p class="has-text-centered mb-2">
+					<b>{{ v.label }} :</b>
+					{{
+						visibleValues[i]
+							? show(v.value)
+								? show(v.value)
+								: "The code you set up is maybe wrong!"
+							: "************************"
+					}}
+				</p>
+				<div class="buttons is-justify-content-center are-small">
+					<button
+						class="button is-rounded is-black"
+						@click="showHideValue(i)"
+					>
+						<i class="fa-solid fa-eye" v-if="!visibleValues[i]"></i>
+						<i class="fa-solid fa-eye-slash" v-if="visibleValues[i]"></i>
+					</button>
+					<button
+						class="button is-rounded is-dark"
+						@click="copy(show(v.value))"
+					>
+						<i class="fa-solid fa-copy"></i>
+					</button>
+				</div>
 			</div>
 			<div class="is-flex is-justify-content-end">
 				<router-link
@@ -85,25 +64,24 @@ export default defineComponent({
     data() {
         return {
             secretService: new SecretService(this.$store.getters.GET_CODE),
-            visibleUsername: false,
-            visibleSecret: false
+            visibleValues: [] as boolean[] 
         };
     },
     methods: {
         show(secret: string){
             return this.secretService.decrypt(secret)
         },
-        showHideUsername() {
-            this.visibleUsername = ! this.visibleUsername
-        },
-        showHideSecret() {
-            this.visibleSecret = ! this.visibleSecret
+        showHideValue(i: number) {
+            this.visibleValues[i] = ! this.visibleValues[i]
         },
         copy(string: string) {
             navigator.clipboard.writeText(string);
             console.log('copied successfully!')
         }
     },
+	created() {
+		this.visibleValues = this.secret.values.map(() => { return false });
+	}
 });
 </script>
 
