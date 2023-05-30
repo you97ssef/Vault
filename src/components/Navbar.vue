@@ -9,12 +9,12 @@
 		>
 			<router-link
 				class="button is-rounded is-dark is-small"
-				to="/categories"
+				to="/secrets"
 			>
 				<span class="icon ml-1"
 					><i class="fa-solid fa-layer-group fa-lg"></i
 				></span>
-				<span>Categories</span>
+				<span>Secrets</span>
 			</router-link>
 			<button
 				class="button is-rounded is-light is-danger is-small"

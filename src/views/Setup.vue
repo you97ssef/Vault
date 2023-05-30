@@ -35,7 +35,7 @@ export default defineComponent({
 			this.$store.commit("SET_CODE", this.code);
 			if (!this.$store.getters.DATA_EXISTS)
 				this.$store.commit("SET_DATA", true);
-			this.$router.push("/categories");
+			this.$router.push("/secrets");
 		}
 	},
 	data() {

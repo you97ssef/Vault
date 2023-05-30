@@ -2,28 +2,21 @@
 	<main>
 		<div class="is-flex is-justify-content-space-between mb-5">
 			<div>
-				<h1 class="title">{{ category.name }}</h1>
+				<h1 class="title">Secrets</h1>
 				<h2 class="subtitle">
-					{{
-						category.description
-							? category.description
-							: "(This category has no description)"
-					}}
+					Your secrets.
 				</h2>
 			</div>
 			<div class="buttons">
 				<router-link
 					class="button is-dark"
-					:to="{
-						name: 'new-secret',
-						params: { categoryId: $route.params.id }
-					}"
+					to="/new-secret"
 				>
 					<span class="icon">
 						<i class="fa-solid fa-lg fa-plus"></i>
 					</span>
 				</router-link>
-				<router-link class="button is-black is-light" to="/categories">
+				<router-link class="button is-black is-light" to="/secrets">
 					<span class="icon">
 						<i class="fa-solid fa-lg fa-arrow-left-long"></i>
 					</span>
@@ -35,10 +28,7 @@
 			<h4 class="title is-4 m-2">No Secrets available!!</h4>
 			<router-link
 				class="button is-dark"
-				:to="{
-					name: 'new-secret',
-					params: { categoryId: $route.params.id }
-				}"
+				to="/new-secret"
 			>
 				<span class="icon">
 					<i class="fa-solid fa-lg fa-plus"></i>
@@ -67,16 +57,11 @@ import Secret from "@/components/Secret.vue";
 export default defineComponent({
 	data() {
 		return {
-			category: {} as any,
 			secrets: [] as any[]
 		};
 	},
 	created() {
-		let category = this.$categoryRepo.get(this.$route.params.id);
-		if (category) {
-			this.category = category;
-			this.secrets = this.$secretRepo.all(this.$route.params.id);
-		} else this.$router.push("/404");
+		this.secrets = this.$secretRepo.all();
 	},
 	components: { Secret }
 });

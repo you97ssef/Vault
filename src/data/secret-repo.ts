@@ -1,9 +1,9 @@
 import type { Secret } from "@/models/secret";
 
 export class SecretRepo {
-    get(categoryId: any, secretId: any) {
+    get(secretId: any) {
         let secret = localStorage.getItem(
-            `secret-${secretId}-category-${categoryId}`
+            `secret-${secretId}`
         );
 
         if (secret) return JSON.parse(secret);
@@ -11,23 +11,23 @@ export class SecretRepo {
         return null;
     }
 
-    save(categoryId: any, secret: Secret) {
-        if (!secret.id) secret.id = this.newId(categoryId);
+    save(secret: Secret) {
+        if (!secret.id) secret.id = this.newId();
         localStorage.setItem(
-            `secret-${secret.id}-category-${categoryId}`,
+            `secret-${secret.id}`,
             JSON.stringify(secret)
         );
     }
 
-    delete(categoryId: any, secretId: any) {
-        localStorage.removeItem(`secret-${secretId}-category-${categoryId}`);
+    delete(secretId: any) {
+        localStorage.removeItem(`secret-${secretId}`);
     }
 
-    all(categoryId: any) {
+    all() {
         let secrets = [];
 
-        for (let i = 1; i <= this.countSecrets(categoryId); i++) {
-            let secret = this.get(categoryId, i);
+        for (let i = 1; i <= this.countSecrets(); i++) {
+            let secret = this.get(i);
 
             if (secret) secrets.push(secret);
         }
@@ -35,21 +35,30 @@ export class SecretRepo {
         return secrets;
     }
 
-    private countSecrets(categoryId: any): number {
-        let category = localStorage.getItem("category-" + categoryId)!;
+    private countSecrets(): number {
+        let secrets = localStorage.getItem("secrets-count");
 
-        return JSON.parse(category).secrets;
+        if (!secrets) {
+            localStorage.setItem(
+                "secrets-count",
+                JSON.stringify(0)
+            );
+
+            return 0;
+        }
+
+        return parseInt(JSON.parse(secrets));
     }
 
-    private newId(categoryId: any): number {
-        let category = JSON.parse(
-            localStorage.getItem("category-" + categoryId)!
+    private newId(): number {
+        let secrets = JSON.parse(
+            localStorage.getItem("secrets-count")!
         );
-        category.secrets++;
+        secrets = parseInt(secrets) + 1;
         localStorage.setItem(
-            "category-" + categoryId,
-            JSON.stringify(category)
+            "secrets-count",
+            JSON.stringify(secrets)
         );
-        return category.secrets;
+        return secrets;
     }
 }

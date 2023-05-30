@@ -6,7 +6,7 @@
                 <h2 class="subtitle">{{ setting.subtitle }}</h2>
             </div>
             <div class="m-2 buttons" v-if="setting.edition">
-                <router-link :to="{ name: 'category', params: { id: $route.params.categoryId } }" class="button is-black is-dark">
+                <router-link to="/secrets" class="button is-black is-dark">
                     <span class="icon">
                         <i class="fa-solid fa-lg fa-ban"></i>
                     </span>
@@ -103,7 +103,7 @@
                     </button>
                 </div>
                 <div class="control">
-                    <router-link :to="{ name: 'category', params: { id: $route.params.categoryId } }" class="button is-light">
+                    <router-link to="/secrets" class="button is-light">
                         <span class="icon">
                             <i class="fa-solid fa-lg fa-ban"></i>
                         </span>
@@ -137,7 +137,7 @@ export default defineComponent({
         else {
             this.setting.title = "Edit";
             this.setting.subtitle = "Edit/Delete your secret.";
-            let secret: Secret = this.$secretRepo.get(this.$route.params.categoryId, this.$route.params.secretId);
+            let secret: Secret = this.$secretRepo.get(this.$route.params.secretId);
             if (secret) {
                 this.secret = secret;
                 for (const v of secret.values) {
@@ -181,16 +181,16 @@ export default defineComponent({
                     this.secret.values.splice(this.indexToDelete, 1)
                     this.toggleModal(false, '', '')
                 } else {
-                    this.$secretRepo.delete(this.$route.params.categoryId, this.secret.id);
-                    this.$router.push("/categories/" + this.$route.params.categoryId);
+                    this.$secretRepo.delete(this.secret.id);
+                    this.$router.push("/secrets");
                 }
             } else {
                 this.secret.values = this.secret.values.map((v: SecretValue) => {
                     v.value = this.secretService.encrypt(v.value);
                     return v;
                 })
-                this.$secretRepo.save(this.$route.params.categoryId, this.secret);
-                this.$router.push("/categories/" + this.$route.params.categoryId);
+                this.$secretRepo.save(this.secret);
+                this.$router.push("/secrets");
             }
         },
         confirm() {

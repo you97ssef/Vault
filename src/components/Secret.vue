@@ -34,7 +34,6 @@
 					:to="{
 						name: 'edit-secret',
 						params: {
-							categoryId: $route.params.id,
 							secretId: secret.id
 						}
 					}"

@@ -22,7 +22,7 @@ import Footer from "./components/Footer.vue";
 
 <style scoped>
 .full {
-	min-height: 100vh;
+	min-height: 100svh;
 }
 
 .down-space {

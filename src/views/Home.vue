@@ -8,7 +8,7 @@
                 <div class="content">
                     <h3 class="subtitle">A secure way to generate your password/secret and store them using your own hash.</h3>
                     <h5 class="mb-1 mt-5">🤨 What's this vault thing ?</h5>
-                    <p>Vault is an app that generate you passwords and let you store them in their categories on your own device. It's simply a vault for your secrets. 😉</p>
+                    <p>Vault is an app that generate you passwords and let you store them on your own device. It's simply a vault for your secrets. 😉</p>
                 
                     <h5 class="mb-1 mt-5">😏 Secure huh, how is it secure ?</h5>
                     <p class="m-0">Well it is secure in many ways</p>
@@ -23,11 +23,11 @@
                         </span>
                         <span>Setup your code here</span>
                     </router-link>
-                    <router-link class="button is-dark" to="/categories" v-if="codeIsSet">
+                    <router-link class="button is-dark" to="/secrets" v-if="codeIsSet">
                         <span class="icon">
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         </span>
-                        <span>Your key is already set, Access your categories</span>
+                        <span>Your key is already set, Access your secrets</span>
                     </router-link>
 
 

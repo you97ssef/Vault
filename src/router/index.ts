@@ -1,6 +1,3 @@
-import Categories from "@/views/category/Categories.vue";
-import CategoryEdition from "@/views/category/CategoryEdition.vue";
-
 import Secrets from "@/views/secret/Secrets.vue";
 import SecretEdition from "@/views/secret/SecretEdition.vue";
 
@@ -25,7 +22,7 @@ function unSet(to: any, from: any, next: any) {
     if (!store.state.code) {
         next();
     } else {
-        next("/categories");
+        next("/secrets");
     }
 }
 
@@ -53,37 +50,19 @@ const router = createRouter({
             component: Home,
         },
         {
-            path: "/categories",
-            name: "categories",
-            component: Categories,
-            beforeEnter: setUp,
-        },
-        {
-            path: "/categories/:id",
-            name: "category",
+            path: "/secrets",
+            name: "secrets",
             component: Secrets,
             beforeEnter: setUp,
         },
         {
-            path: "/categories/:id/edit",
-            name: "edit-category",
-            component: CategoryEdition,
-            beforeEnter: setUp,
-        },
-        {
-            path: "/new-category",
-            name: "new-category",
-            component: CategoryEdition,
-            beforeEnter: setUp,
-        },
-        {
-            path: "/categories/:categoryId/new-secret",
+            path: "/new-secret",
             name: "new-secret",
             component: SecretEdition,
             beforeEnter: setUp,
         },
         {
-            path: "/categories/:categoryId/edit-secret/:secretId",
+            path: "/edit-secret/:secretId",
             name: "edit-secret",
             component: SecretEdition,
             beforeEnter: setUp,
