@@ -29,6 +29,21 @@
 					</button>
 				</div>
 			</div>
+
+			<div class="field is-grouped is-justify-content-center mt-5">
+                <div v-if="secret.tags.length == 0">No tags available</div> 
+                <div class="control" v-for="(t, i) in secret.tags" :key="i">
+                    <button 
+						type="button" 
+						class="button is-small is-link"
+						:class="selectedTags.indexOf(t) == -1 ? 'is-outlined' : ''"
+						@click="selectTag(t)"
+					>
+                        <span>{{ t }}</span>
+                    </button>
+                </div>
+            </div>
+
 			<div class="is-flex is-justify-content-end">
 				<router-link
 					:to="{
@@ -59,6 +74,10 @@ export default defineComponent({
             type: Object as PropType<Secret>,
             required: true
         },
+		selectedTags: {
+			type: Array,
+			required: true
+		}
     },
     data() {
         return {
@@ -76,7 +95,10 @@ export default defineComponent({
         copy(string: string) {
             navigator.clipboard.writeText(string);
             console.log('copied successfully!')
-        }
+        },
+		selectTag(tag: string) {
+			this.$emit("tag", tag)
+		}
     },
 	created() {
 		this.visibleValues = this.secret.values.map(() => { return false });
