@@ -24,6 +24,31 @@
 			</div>
 		</div>
 
+		<div class="field is-grouped my-5">
+			<div class="control is-expanded">
+				<input 
+					class="input" 
+					type="text" 
+					placeholder="Search by topic..." 
+					v-model="searchQuery"
+				>
+			</div>
+			<div class="control">
+				<button type="button" class="button is-dark" @click="search()">
+					<div class="icon">
+						<i class="fa-solid fa-lg fa-search"></i>
+					</div>
+				</button>
+			</div>
+			<div class="control" v-if="searchQuery.length > 0">
+				<button type="button" class="button is-danger" @click="cancel()">
+					<div class="icon">
+						<i class="fa-solid fa-lg fa-xmark"></i>
+					</div>
+				</button>
+			</div>
+		</div>
+
 		<div v-if="selectedTags.length > 0">
 			<div class="field is-grouped is-justify-content-center my-5"> 
 				<div class="control" v-for="(t, i) in selectedTags" :key="i">
@@ -73,7 +98,8 @@ export default defineComponent({
 		return {
 			secrets: [] as any[],
 			selectedSecrets: [] as any[],
-			selectedTags: [] as string[]
+			selectedTags: [] as string[],
+			searchQuery: "" as string
 		};
 	},
 	created() {
@@ -92,7 +118,9 @@ export default defineComponent({
 			this.setSelectedSecrets()
 		},
 		setSelectedSecrets() {
+			this.searchQuery = ""
 			this.selectedSecrets = []
+
 			if (this.selectedTags.length == 0) {
 				this.selectedSecrets = this.secrets
 			} else {
@@ -105,6 +133,24 @@ export default defineComponent({
 					}
 				}
 			}
+		},
+		search() {
+			this.selectedTags = []
+			this.selectedSecrets = []
+
+			if (this.searchQuery.length == 0) {
+				this.selectedSecrets = this.secrets
+			} else {
+				for (const s of this.secrets) {
+					if (s.topic.includes(this.searchQuery)) {
+						this.selectedSecrets.push(s);
+					}
+				}
+			}
+		},
+		cancel() {
+			this.searchQuery = ""
+			this.search()
 		}
 	},
 	components: { Secret }
