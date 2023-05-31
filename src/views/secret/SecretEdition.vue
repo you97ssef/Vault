@@ -21,6 +21,38 @@
                 </div>
             </div>
 
+            <label class="label is-small">Tags</label>
+            <div class="field is-grouped">
+                <div class="control is-expanded">
+                    <input 
+                        class="input is-small" 
+                        type="text" 
+                        placeholder="Secret..." 
+                        v-model="tag"
+                    >
+                </div>
+                <div class="control">
+                    <button type="button" class="button is-dark is-small" @click="addTag()">
+                        <div class="icon">
+                            <i class="fa-solid fa-lg fa-add"></i>
+                        </div>
+                    </button>
+                </div>
+                
+            </div>
+            
+            <div class="field is-grouped is-justify-content-center">
+                <div v-if="secret.tags.length == 0">No tags available</div> 
+                <div class="control" v-for="(t, i) in secret.tags" :key="i">
+                    <button type="button" class="button is-small is-rounded is-light" @click="deleteTag(i)">
+                        <span>{{ t }}</span>
+                        <span class="icon">
+                            <i class="fa-solid fa-xmark"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
             <div v-for="(v, i) in secret.values" :key="i">
                 <label class="label">Value</label>
                 <div class="field is-grouped">
@@ -74,7 +106,7 @@
                         <span class="icon">
                             <i class="fa-solid fa-lg fa-plus"></i>
                         </span>
-                        <span>Add Value</span>
+                        <span>Add value</span>
                     </button>
                 </div>
             </div>
@@ -152,9 +184,11 @@ export default defineComponent({
         let secret: Secret = {
             id: null,
             topic: "",
-            values: []
+            values: [],
+            tags: []
         };
         return {
+            tag: "",
             secretService: new SecretService(this.$store.getters.GET_CODE),
             setting: {
                 title: "",
@@ -218,6 +252,15 @@ export default defineComponent({
         deleteValue(i: number) {
             this.indexToDelete = i
             this.toggleModal(true, "Delete value", "Delete");
+        },
+        addTag() {
+            if (this.tag.length > 0 && this.secret.tags.indexOf(this.tag) == -1) {
+                this.secret.tags.push(this.tag)
+                this.tag = ""
+            }
+        },
+        deleteTag(i: number) {
+            this.secret.tags.splice(i, 1)
         }
     },
     components: { SecretGenerator, Modal }
