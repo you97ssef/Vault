@@ -1,4 +1,4 @@
 export interface SecretValue {
-    label: string | null,
-    value: string
+    label: string | null;
+    value: string;
 }

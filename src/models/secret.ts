@@ -3,5 +3,6 @@ import type { SecretValue } from "./secret-value";
 export interface Secret {
     id: number | null;
     topic: string;
-    values: SecretValue[]
+    values: SecretValue[];
+    tags: string[];
 }
