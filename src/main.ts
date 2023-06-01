@@ -10,6 +10,7 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 import { SecretRepo } from "./data/secret-repo";
 
 import { DataService } from "./services/data-service";
+import { Schema } from "./data/db";
 
 const app = createApp(App);
 
@@ -24,7 +25,9 @@ declare module "vue" {
     }
 }
 
+const db = new Schema("secrets-test", 1);
+
 app.config.globalProperties.$dataService = new DataService();
-app.config.globalProperties.$secretRepo = new SecretRepo();
+app.config.globalProperties.$secretRepo = new SecretRepo(db);
 
 app.mount("#app");

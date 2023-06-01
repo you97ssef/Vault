@@ -102,8 +102,8 @@ export default defineComponent({
 			searchQuery: "" as string
 		};
 	},
-	created() {
-		this.secrets = this.$secretRepo.all();
+	async created() {
+		this.secrets = await this.$secretRepo.all();
 		this.setSelectedSecrets()
 	},
 	methods: {

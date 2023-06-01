@@ -158,7 +158,7 @@ import Modal from '@/components/Modal.vue';
 import type { ModalState } from "@/models/modal-state";
 
 export default defineComponent({
-    created() {
+    async created() {
         // setting page settings depending on the route
         if (this.$route.name == "new-secret") {
             this.setting.title = "New";
@@ -169,8 +169,8 @@ export default defineComponent({
         else {
             this.setting.title = "Edit";
             this.setting.subtitle = "Edit/Delete your secret.";
-            let secret: Secret = this.$secretRepo.get(this.$route.params.secretId);
-            if (secret) {
+            let secret: Secret | undefined = await this.$secretRepo.get(this.$route.params.secretId);
+            if (secret != undefined) {
                 this.secret = secret;
                 for (const v of secret.values) {
                     v.value = this.secretService.decrypt(v.value);
@@ -209,13 +209,13 @@ export default defineComponent({
         deleteSecret() {
             this.toggleModal(true, "Delete secret", "Delete");
         },
-        submit(type: string) {
+        async submit(type: string) {
             if(type == "Delete") {
                 if (this.modal.title == "Delete value") {
                     this.secret.values.splice(this.indexToDelete, 1)
                     this.toggleModal(false, '', '')
                 } else {
-                    this.$secretRepo.delete(this.secret.id);
+                    await this.$secretRepo.delete(this.secret.id);
                     this.$router.push("/secrets");
                 }
             } else {
@@ -223,7 +223,7 @@ export default defineComponent({
                     v.value = this.secretService.encrypt(v.value);
                     return v;
                 })
-                this.$secretRepo.save(this.secret);
+                await this.$secretRepo.save(this.secret);
                 this.$router.push("/secrets");
             }
         },

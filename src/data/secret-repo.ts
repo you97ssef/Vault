@@ -1,64 +1,61 @@
 import type { Secret } from "@/models/secret";
+import type { Schema } from "./db";
 
 export class SecretRepo {
-    get(secretId: any) {
-        let secret = localStorage.getItem(
-            `secret-${secretId}`
-        );
+    constructor(private db: Schema) {}
 
-        if (secret) return JSON.parse(secret);
+    async get(secretId: any) {
+        try {
+            let data = await this.db.secrets.get(Number(secretId));
 
-        return null;
-    }
-
-    save(secret: Secret) {
-        if (!secret.id) secret.id = this.newId();
-        localStorage.setItem(
-            `secret-${secret.id}`,
-            JSON.stringify(secret)
-        );
-    }
-
-    delete(secretId: any) {
-        localStorage.removeItem(`secret-${secretId}`);
-    }
-
-    all() {
-        let secrets = [];
-
-        for (let i = 1; i <= this.countSecrets(); i++) {
-            let secret = this.get(i);
-
-            if (secret) secrets.push(secret);
+            return {
+                id: data.id,
+                topic: data.topic,
+                tags: JSON.parse(data.tags),
+                values: JSON.parse(data.values),
+            } as Secret;
+        } catch (error) {
+            console.error(error);
+            return undefined;
         }
-
-        return secrets;
     }
 
-    private countSecrets(): number {
-        let secrets = localStorage.getItem("secrets-count");
+    async save(secret: Secret) {
+        let data = {
+            topic: secret.topic,
+            tags: JSON.stringify(secret.tags),
+            values: JSON.stringify(secret.values),
+        } as any;
 
-        if (!secrets) {
-            localStorage.setItem(
-                "secrets-count",
-                JSON.stringify(0)
-            );
-
-            return 0;
+        try {
+            if (secret.id != null) data.id = secret.id;
+            await this.db.secrets.put(data);
+        } catch (error) {
+            console.error(error);
         }
-
-        return parseInt(JSON.parse(secrets));
     }
 
-    private newId(): number {
-        let secrets = JSON.parse(
-            localStorage.getItem("secrets-count")!
-        );
-        secrets = parseInt(secrets) + 1;
-        localStorage.setItem(
-            "secrets-count",
-            JSON.stringify(secrets)
-        );
-        return secrets;
+    async delete(secretId: any) {
+        try {
+            await this.db.secrets.delete(Number(secretId));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async all() {
+        try {
+            return (await this.db.secrets.toArray()).map((s) => {
+                return {
+                    id: s.id,
+                    topic: s.topic,
+                    tags: JSON.parse(s.tags),
+                    values: JSON.parse(s.values),
+                } as Secret;
+            });
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
     }
 }
