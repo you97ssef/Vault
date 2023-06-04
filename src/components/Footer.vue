@@ -109,14 +109,21 @@
 				</div>
 				<h6 class="title is-6">Contact me</h6>
 				<p>
-					<small class="m-1">Check out the secret/password generator</small>
+					<small class="m-1">Check out the secret generator and file encryptor</small>
 				</p>
 				<router-link
-					class="button is-rounded is-link is-small"
+					class="button is-rounded is-link is-small m-1"
 					to="/generator"
 				>
 					<span class="icon ml-1"><i class="fa-solid fa-rotate fa-lg"></i></span>
-					<span>Secret/Password generator</span>
+					<span>Secret generator</span>
+				</router-link>
+				<router-link
+					class="button is-rounded is-success is-small m-1"
+					to="/file-crypto"
+				>
+					<span class="icon ml-1"><i class="fa-solid fa-file-shield fa-lg"></i></span>
+					<span>File crypto</span>
 				</router-link>
 			</div>
 		</div>

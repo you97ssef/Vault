@@ -6,6 +6,7 @@ import Home from "@/views/Home.vue";
 
 import NotFound from "@/views/NotFound.vue";
 import Generator from "@/views/Generator.vue";
+import FileCrypto from "@/views/FileCrypto.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
@@ -66,6 +67,11 @@ const router = createRouter({
             name: "edit-secret",
             component: SecretEdition,
             beforeEnter: setUp,
+        },
+        {
+            path: "/file-crypto",
+            name: "file-crypto",
+            component: FileCrypto
         },
         {
             path: "/404",
