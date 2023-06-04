@@ -14,14 +14,14 @@
             </div>
         </div>
         <form class="top-space" @submit.prevent="confirm()">
-            <div class="field">
+            <div class="field my-5">
                 <label class="label">Topic</label>
                 <div class="control">
                     <input class="input" type="text" placeholder="Secret topic ..." v-model="secret.topic" required>
                 </div>
             </div>
 
-            <label class="label is-small">Tags</label>
+            <label class="label is-small mt-5">Tags</label>
             <div class="field is-grouped">
                 <div class="control is-expanded">
                     <input 
@@ -41,7 +41,7 @@
                 
             </div>
             
-            <div class="field is-grouped is-justify-content-center">
+            <div class="field is-grouped is-justify-content-center mb-5">
                 <div v-if="secret.tags.length == 0">No tags available</div> 
                 <div class="control" v-for="(t, i) in secret.tags" :key="i">
                     <button type="button" class="button is-small is-rounded is-light" @click="deleteTag(i)">
@@ -53,10 +53,10 @@
                 </div>
             </div>
 
-            <div v-for="(v, i) in secret.values" :key="i">
+            <div class="my-5" v-for="(v, i) in secret.values" :key="i">
                 <label class="label">Value</label>
-                <div class="field is-grouped">
-                    <div class="control">
+                <div class="field is-grouped is-flex-wrap-wrap">
+                    <div class="control mt-1">
                         <input 
                             class="input" 
                             type="text"
@@ -65,7 +65,7 @@
                             required
                         >
                     </div>
-                    <div class="control is-expanded">
+                    <div class="control mt-1 is-expanded">
                         <input 
                             class="input" 
                             :type="secretsVisibility[i] ? 'text' : 'password'" 
@@ -74,7 +74,7 @@
                             required
                         >
                     </div>
-                    <div class="control">
+                    <div class="control mt-1">
                         <button type="button" class="button is-dark" @click="toggleVisibility(i)">
                             <div class="icon">
                                 <i class="fa-solid fa-lg fa-eye" v-if="!secretsVisibility[i]"></i>
@@ -82,14 +82,14 @@
                             </div>
                         </button>
                     </div>
-                    <div class="control">
+                    <div class="control mt-1">
                         <button type="button" class="button is-dark" @click="copy(v)">
                             <div class="icon">
                                 <i class="fa-solid fa-lg fa-copy"></i>
                             </div>
                         </button>
                     </div>
-                    <div class="control">
+                    <div class="control mt-1" v-if="secret.values.length > 1">
                         <button type="button" class="button is-danger is-light" @click="deleteValue(i)">
                             <div class="icon">
                                 <i class="fa-regular fa-lg fa-trash-can"></i>
@@ -100,7 +100,7 @@
                 <SecretGenerator :i="i" @secret="secretGenerated"></SecretGenerator>
             </div>
 
-            <div class="field is-grouped is-justify-content-center">
+            <div class="field is-grouped is-justify-content-center my-5">
                 <div class="control">
                     <button type="button" class="button is-rounded is-primary is-light" @click="addNewValue()">
                         <span class="icon">
