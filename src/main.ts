@@ -27,7 +27,7 @@ declare module "vue" {
 
 const db = new Schema("secrets-test", 1);
 
-app.config.globalProperties.$dataService = new DataService();
 app.config.globalProperties.$secretRepo = new SecretRepo(db);
+app.config.globalProperties.$dataService = new DataService(db);
 
 app.mount("#app");

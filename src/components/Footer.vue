@@ -160,15 +160,15 @@ export default defineComponent({
         }
     },
     methods: {
-        exportData() {
-            this.$dataService.export();
+        async exportData() {
+            await this.$dataService.export();
         },
         importData(event: any) {
             this.$dataService.import(event.target.files[0]);
         },
-        clearData() {
+        async clearData() {
             if (confirm("Are you sure you want to delete all your data?")) {
-                this.$dataService.clear();
+                await this.$dataService.clear();
                 this.$store.commit("SET_CODE", null);
                 this.$store.commit("SET_DATA", false);
                 this.$router.push("/setup");
