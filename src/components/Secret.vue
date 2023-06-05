@@ -10,7 +10,7 @@
 							? show(v.value)
 								? show(v.value)
 								: "The code you set up is maybe wrong!"
-							: "************************"
+							: "⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕"
 					}}
 				</p>
 				<div class="buttons is-justify-content-center are-small">

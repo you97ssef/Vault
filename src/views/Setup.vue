@@ -12,7 +12,7 @@
 						class="input"
 						type="password"
 						v-model="code"
-						placeholder="********"
+						placeholder="Secret..."
 						required
 					/>
 				</div>
@@ -47,6 +47,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.box {
+	border: 0.2em black solid;
+}
+
 .top-space {
 	margin-top: 3em;
 }
