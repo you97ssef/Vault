@@ -17,7 +17,7 @@
 			to="/setup"
 			v-if="!code"
 		>
-			Setup app code
+			Setup app hash
 		</router-link>
 		<router-link
 			class="nav-link mx-2 my-2 has-text-dark"
@@ -27,19 +27,19 @@
 		</router-link>
 		<router-link
 			class="nav-link mx-2 my-2 has-text-dark"
-			to="/file-crypto"
+			to="/file-encryptor"
 		>
-			File crypto
+			File encryptor
 		</router-link>
 		<p class="mx-2 my-2 has-text-dark" v-if="code">
 			<span v-if="codeVisible">{{ code }}</span>
 			<span v-if="!codeVisible">⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕</span>
 		</p>
 		<a class="nav-link mx-2 my-2 has-text-primary-dark" v-if="code" @click="changeVisibility()">
-			<span v-if="!codeVisible">Show code</span>
-			<span v-if="codeVisible">Hide code</span>
+			<span v-if="!codeVisible">Show hash</span>
+			<span v-if="codeVisible">Hide hash</span>
 		</a>
-		<a class="nav-link mx-2 my-2 has-text-danger-dark" v-if="code" @click="unsetCode()">Unset code</a>
+		<a class="nav-link mx-2 my-2 has-text-danger-dark" v-if="code" @click="unsetCode()">Unset hash</a>
 	</div>
 </template>
 

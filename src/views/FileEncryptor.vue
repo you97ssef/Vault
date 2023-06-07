@@ -2,24 +2,24 @@
     <div class="has-text-centered">
         <img src="@/assets/images/secure_files.svg" alt="empty" width="200" />
         <h3 class="title is-3">File Encryption / Decryption</h3>
-        <h5 class="subtitle is-5">Securely Encrypt and Decrypt Your Files with a Personal Passcode.</h5>
+        <h5 class="subtitle is-5">Securely Encrypt and Decrypt Your Files with a Personal Hash.</h5>
         <div class="card has-background-link-light">
             <div class="card-content">
-                <h6 class="subtitle is-6">Enter your code below to Encrypt/Decrypt your file <span v-if="$store.getters.GET_CODE"> or use the code you setup on the app</span></h6>
+                <h6 class="subtitle is-6">Enter your hash below to Encrypt/Decrypt your file <span v-if="$store.getters.GET_CODE"> or use the hash you setup on the app</span></h6>
                 <div class="field" v-if="!useAppCode">
                     <div class="control">
                         <input
                             class="input"
                             type="text"
                             v-model="code"
-                            placeholder="Encryption code"
+                            placeholder="Encryption hash"
                             required
                         />
                     </div>
                 </div>
                 <div class="field" v-if="$store.getters.GET_CODE">
                     <label class="checkbox">
-                        <input type="checkbox" v-model="useAppCode"> Use code you setup for the app
+                        <input type="checkbox" v-model="useAppCode"> Use hash you setup for the app
                     </label>
                 </div>
                 <div class="is-flex is-justify-content-center is-flex-wrap-wrap">

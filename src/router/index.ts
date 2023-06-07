@@ -6,7 +6,7 @@ import Home from "@/views/Home.vue";
 
 import NotFound from "@/views/NotFound.vue";
 import Generator from "@/views/Generator.vue";
-import FileCrypto from "@/views/FileCrypto.vue";
+import FileEncryptor from "@/views/FileEncryptor.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
@@ -31,7 +31,7 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     scrollBehavior(to, from, savedPosition) {
         // always scroll to top
-        return { top: 0 }
+        return { top: 0 };
     },
     routes: [
         {
@@ -69,9 +69,9 @@ const router = createRouter({
             beforeEnter: setUp,
         },
         {
-            path: "/file-crypto",
-            name: "file-crypto",
-            component: FileCrypto
+            path: "/file-encryptor",
+            name: "file-encryptor",
+            component: FileEncryptor,
         },
         {
             path: "/404",

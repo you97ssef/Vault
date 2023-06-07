@@ -9,7 +9,7 @@
 						visibleValues[i]
 							? show(v.value)
 								? show(v.value)
-								: "The code you set up is maybe wrong!"
+								: "The hash you set up is wrong!"
 							: "⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕"
 					}}
 				</p>

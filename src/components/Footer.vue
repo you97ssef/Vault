@@ -29,7 +29,7 @@
 				</label>
 			</div>
 			<div class="column is-mobile has-text-centered" v-if="dataExists">
-				<h6 class="title is-6 m-0">Export your data into a file</h6>
+				<h6 class="title is-6 m-0">Export your data</h6>
 				<p>
 					<small
 						>You can export your data and use it in another device
@@ -120,10 +120,10 @@
 				</router-link>
 				<router-link
 					class="button is-rounded is-success is-small m-1"
-					to="/file-crypto"
+					to="/file-encryptor"
 				>
 					<span class="icon ml-1"><i class="fa-solid fa-file-shield fa-lg"></i></span>
-					<span>File crypto</span>
+					<span>File encryptor</span>
 				</router-link>
 			</div>
 		</div>
