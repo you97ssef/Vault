@@ -2,9 +2,9 @@
 	<div class="has-text-centered top-space">
 		<img src="@/assets/images/secret.svg" alt="empty" width="200" />
 		<form class="box mt-5" @submit.prevent="setSecret()">
-			<h3 class="title is-3">Setup your secret code</h3>
+			<h3 class="title is-3">Setup your hash</h3>
 			<h6 class="subtitle is-6">
-				The code that will be used to hash your secrets.
+				The hash that will be used to encrypt and decrypt your secrets.
 			</h6>
 			<div class="field">
 				<div class="control">
@@ -12,7 +12,7 @@
 						class="input"
 						type="password"
 						v-model="code"
-						placeholder="********"
+						placeholder="Hash..."
 						required
 					/>
 				</div>
@@ -20,7 +20,7 @@
 
 			<button class="button is-dark">
 				<span class="icon"><i class="fa-solid fa-key"></i></span>
-				<span>Setup Key</span>
+				<span>Setup hash</span>
 			</button>
 		</form>
 	</div>
@@ -35,7 +35,7 @@ export default defineComponent({
 			this.$store.commit("SET_CODE", this.code);
 			if (!this.$store.getters.DATA_EXISTS)
 				this.$store.commit("SET_DATA", true);
-			this.$router.push("/categories");
+			this.$router.push("/secrets");
 		}
 	},
 	data() {
@@ -47,6 +47,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.box {
+	border: 0.2em black solid;
+}
+
 .top-space {
 	margin-top: 3em;
 }

@@ -7,10 +7,10 @@ import type { Store } from "vuex";
 import "./assets/css/style.sass";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
-import { CategoryRepo } from "./data/category-repo";
 import { SecretRepo } from "./data/secret-repo";
 
 import { DataService } from "./services/data-service";
+import { Schema } from "./data/db";
 
 const app = createApp(App);
 
@@ -20,14 +20,14 @@ app.use(store);
 declare module "vue" {
     interface ComponentCustomProperties {
         $dataService: DataService;
-        $categoryRepo: CategoryRepo;
         $secretRepo: SecretRepo;
         $store: Store<any>;
     }
 }
 
-app.config.globalProperties.$dataService = new DataService();
-app.config.globalProperties.$categoryRepo = new CategoryRepo();
-app.config.globalProperties.$secretRepo = new SecretRepo();
+const db = new Schema("secrets-test", 1);
+
+app.config.globalProperties.$secretRepo = new SecretRepo(db);
+app.config.globalProperties.$dataService = new DataService(db);
 
 app.mount("#app");

@@ -3,7 +3,7 @@
 		<img src="@/assets/images/not-found.svg" alt="empty" width="300" />
 		<h3 class="title is-3">Page not found</h3>
 		<h5 class="subtitle is-5">We are sorry, this page is not found!</h5>
-		<router-link class="button is-light" to="/categories">
+		<router-link class="button is-light" to="/secrets">
 			<span class="icon">
 				<i class="fa-solid fa-lg fa-arrow-left"></i>
 			</span>

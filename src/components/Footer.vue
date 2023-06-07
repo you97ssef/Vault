@@ -29,7 +29,7 @@
 				</label>
 			</div>
 			<div class="column is-mobile has-text-centered" v-if="dataExists">
-				<h6 class="title is-6 m-0">Export your data into a file</h6>
+				<h6 class="title is-6 m-0">Export your data</h6>
 				<p>
 					<small
 						>You can export your data and use it in another device
@@ -109,14 +109,21 @@
 				</div>
 				<h6 class="title is-6">Contact me</h6>
 				<p>
-					<small class="m-1">Check out the secret/password generator</small>
+					<small class="m-1">Check out the secret generator and file encryptor</small>
 				</p>
 				<router-link
-					class="button is-rounded is-link is-small"
+					class="button is-rounded is-link is-small m-1"
 					to="/generator"
 				>
 					<span class="icon ml-1"><i class="fa-solid fa-rotate fa-lg"></i></span>
-					<span>Secret/Password generator</span>
+					<span>Secret generator</span>
+				</router-link>
+				<router-link
+					class="button is-rounded is-success is-small m-1"
+					to="/file-encryptor"
+				>
+					<span class="icon ml-1"><i class="fa-solid fa-file-shield fa-lg"></i></span>
+					<span>File encryptor</span>
 				</router-link>
 			</div>
 		</div>
@@ -160,15 +167,15 @@ export default defineComponent({
         }
     },
     methods: {
-        exportData() {
-            this.$dataService.export();
+        async exportData() {
+            await this.$dataService.export();
         },
         importData(event: any) {
             this.$dataService.import(event.target.files[0]);
         },
-        clearData() {
+        async clearData() {
             if (confirm("Are you sure you want to delete all your data?")) {
-                this.$dataService.clear();
+                await this.$dataService.clear();
                 this.$store.commit("SET_CODE", null);
                 this.$store.commit("SET_DATA", false);
                 this.$router.push("/setup");

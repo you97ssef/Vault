@@ -1,6 +1,3 @@
-import Categories from "@/views/category/Categories.vue";
-import CategoryEdition from "@/views/category/CategoryEdition.vue";
-
 import Secrets from "@/views/secret/Secrets.vue";
 import SecretEdition from "@/views/secret/SecretEdition.vue";
 
@@ -9,6 +6,7 @@ import Home from "@/views/Home.vue";
 
 import NotFound from "@/views/NotFound.vue";
 import Generator from "@/views/Generator.vue";
+import FileEncryptor from "@/views/FileEncryptor.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
@@ -25,7 +23,7 @@ function unSet(to: any, from: any, next: any) {
     if (!store.state.code) {
         next();
     } else {
-        next("/categories");
+        next("/secrets");
     }
 }
 
@@ -33,7 +31,7 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     scrollBehavior(to, from, savedPosition) {
         // always scroll to top
-        return { top: 0 }
+        return { top: 0 };
     },
     routes: [
         {
@@ -53,40 +51,27 @@ const router = createRouter({
             component: Home,
         },
         {
-            path: "/categories",
-            name: "categories",
-            component: Categories,
-            beforeEnter: setUp,
-        },
-        {
-            path: "/categories/:id",
-            name: "category",
+            path: "/secrets",
+            name: "secrets",
             component: Secrets,
             beforeEnter: setUp,
         },
         {
-            path: "/categories/:id/edit",
-            name: "edit-category",
-            component: CategoryEdition,
-            beforeEnter: setUp,
-        },
-        {
-            path: "/new-category",
-            name: "new-category",
-            component: CategoryEdition,
-            beforeEnter: setUp,
-        },
-        {
-            path: "/categories/:categoryId/new-secret",
+            path: "/new-secret",
             name: "new-secret",
             component: SecretEdition,
             beforeEnter: setUp,
         },
         {
-            path: "/categories/:categoryId/edit-secret/:secretId",
+            path: "/edit-secret/:secretId",
             name: "edit-secret",
             component: SecretEdition,
             beforeEnter: setUp,
+        },
+        {
+            path: "/file-encryptor",
+            name: "file-encryptor",
+            component: FileEncryptor,
         },
         {
             path: "/404",
